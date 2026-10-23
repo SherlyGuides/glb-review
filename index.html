@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ThinkPro Build Review</title>
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink-900:#15110e;--ink-800:#1d1815;--ink-700:#262019;--ink-600:#322a22;
+  --stone-50:#faf8f5;--stone-100:#f4f0eb;--stone-200:#eae4dc;--stone-300:#dbd2c7;--stone-500:#8c8073;--stone-600:#665d53;
+  --rust-400:#d4623a;--rust-500:#b8451f;--rust-600:#9a3413;--rust-050:#fbf0eb;
+  --moss-500:#4f6b41;--moss-050:#f0f4ed;
+  --stage:#eae6e0;--panel:#ffffff;--text:var(--ink-800);--muted:var(--stone-600);
+  --line:rgba(38,32,25,.12);--line-strong:rgba(38,32,25,.24);
+  --font-display:'Bricolage Grotesque','Instrument Sans',system-ui,sans-serif;
+  --font-ui:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--stone-100);color:var(--text);font:15px/1.45 var(--font-ui)}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+.app{display:grid;grid-template-rows:auto 1fr;height:100dvh}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--ink-800);color:#f6f1ea}
+header img{height:28px;width:auto}
+header h1{font:600 17px/1.2 var(--font-display);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .who{font-size:13px;color:#b3a89c;white-space:nowrap}
+.main{display:grid;grid-template-columns:1fr 400px;min-height:0}
+.stage{position:relative;background:var(--stage);min-height:0;overflow:hidden}
+.stage canvas{display:block;width:100%;height:100%;touch-action:none}
+.stage.pinning canvas{cursor:crosshair}
+.caption{position:absolute;left:50%;transform:translateX(-50%);bottom:84px;max-width:min(760px,calc(100% - 32px));background:rgba(29,24,21,.88);color:#f6f1ea;padding:10px 16px;border-radius:12px;text-align:center;pointer-events:none}
+.caption b{font-family:var(--font-display);color:#f3b89f;margin-right:6px}
+.caption small{display:block;color:#b3a89c;font-size:12px}
+.transport{position:absolute;left:16px;right:16px;bottom:16px;display:flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px 10px;box-shadow:0 6px 20px rgba(38,32,25,.1)}
+.transport input[type=range]{flex:1;accent-color:var(--rust-500);min-width:60px}
+.ib{border:1px solid var(--line);background:var(--stone-50);border-radius:10px;height:36px;min-width:36px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:13px}
+.ib:hover{border-color:var(--line-strong)}
+.ib.primary{background:var(--rust-500);border-color:var(--rust-500);color:#fff}
+.ib.primary:hover{background:var(--rust-600)}
+.ib.on{background:var(--rust-050);border-color:var(--rust-400);color:var(--rust-600)}
+.ib svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.time{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);white-space:nowrap}
+.views{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
+.pinbar{position:absolute;top:12px;right:12px;display:flex;gap:6px;align-items:center}
+.hint{position:absolute;top:60px;right:12px;background:var(--ink-800);color:#f6f1ea;font-size:13px;padding:8px 12px;border-radius:10px;max-width:260px}
+.pin{position:absolute;transform:translate(-50%,-100%);pointer-events:auto;cursor:pointer}
+.pin span{display:grid;place-items:center;width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--rust-500);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.pin span i{transform:rotate(45deg);font-style:normal;color:#fff;font-weight:700;font-size:12px}
+.pin.other span{background:var(--ink-600)}
+.loading{position:absolute;inset:0;display:grid;place-items:center;background:var(--stage);z-index:5}
+.loading .box{width:min(320px,80%);text-align:center}
+.bar{height:6px;border-radius:3px;background:var(--stone-300);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;width:0;background:var(--rust-500);transition:width .2s}
+aside{background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tabs button{flex:1;border:0;background:none;padding:12px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent}
+.tabs button.on{color:var(--rust-600);border-bottom-color:var(--rust-500)}
+.pane{overflow:auto;flex:1;min-height:0}
+.pane[hidden]{display:none}
+.banner{margin:12px 12px 0;padding:10px 12px;border-radius:10px;background:var(--rust-050);color:var(--rust-600);font-size:13px}
+.banner.moss{background:var(--moss-050);color:var(--moss-500)}
+.banner button{margin-top:6px}
+.steps{list-style:none;margin:0;padding:8px}
+.step{border:1px solid transparent;border-radius:12px;padding:10px 12px;margin-bottom:4px;cursor:pointer}
+.step:hover{background:var(--stone-50)}
+.step.active{border-color:var(--rust-400);background:var(--rust-050)}
+.step .top{display:flex;gap:10px;align-items:baseline}
+.step .n{font:700 15px var(--font-display);color:var(--rust-600);min-width:24px}
+.step .t{flex:1}
+.step .meta{font-size:12px;color:var(--muted)}
+.badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.badge.ok{background:var(--moss-050);color:var(--moss-500)}
+.badge.change{background:var(--rust-050);color:var(--rust-600);border:1px solid var(--rust-400)}
+.badge.pins{background:var(--stone-200);color:var(--ink-600)}
+.verdict{display:flex;gap:6px;margin-top:10px}
+.verdict .ib{flex:1}
+.verdict .ib.ok-on{background:var(--moss-050);border-color:var(--moss-500);color:var(--moss-500)}
+textarea{width:100%;min-height:64px;margin-top:8px;border:1px solid var(--line-strong);border-radius:10px;padding:8px 10px;background:#fff;resize:vertical}
+textarea:focus,input:focus{outline:2px solid var(--rust-400);outline-offset:1px}
+.section{padding:12px 16px;border-bottom:1px solid var(--line)}
+.section h3{margin:0 0 6px;font:600 15px var(--font-display)}
+.pinrow{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+.pinrow:first-of-type{border-top:0}
+.pinrow .num{width:22px;height:22px;border-radius:50%;background:var(--rust-500);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;flex:none}
+.pinrow .body{flex:1;min-width:0}
+.pinrow .body p{margin:0;white-space:pre-wrap;word-break:break-word}
+.pinrow .actions{display:flex;gap:6px;margin-top:4px}
+.link{border:0;background:none;padding:0;color:var(--rust-600);font-weight:600;font-size:13px}
+.footer{padding:12px;border-top:1px solid var(--line);display:flex;gap:8px}
+.footer .ib{flex:1;height:42px}
+.summary{display:flex;gap:8px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+dialog{border:0;border-radius:16px;padding:0;width:min(480px,calc(100% - 32px));box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(21,17,14,.55)}
+dialog .dbody{padding:20px}
+dialog h2{margin:0 0 6px;font:700 20px var(--font-display)}
+dialog p{margin:0 0 12px;color:var(--muted)}
+dialog input[type=text]{width:100%;border:1px solid var(--line-strong);border-radius:10px;padding:10px 12px}
+dialog .row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+dialog .row .ib{flex:1;height:42px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink-800);color:#f6f1ea;padding:10px 16px;border-radius:10px;font-size:14px;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.hide-sm{}
+@media (max-width:900px){
+  .app{height:auto;min-height:100dvh}
+  .main{grid-template-columns:1fr}
+  .stage{height:62dvh}
+  aside{border-left:0;border-top:1px solid var(--line)}
+  .pane{max-height:none;overflow:visible}
+  .caption{bottom:76px;font-size:13px;padding:8px 12px}
+  .hide-sm{display:none}
+  .transport{left:8px;right:8px;bottom:8px;gap:6px;padding:6px}
+  .views{left:8px;top:8px}.pinbar{right:8px;top:8px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <img src="assets/thinkpro-academy-mark-reversed.png" alt="ThinkPro Academy">
+    <h1 id="title">Build review</h1>
+    <span class="who" id="who"></span>
+  </header>
+  <div class="main">
+    <div class="stage" id="stage">
+      <div class="loading" id="loading"><div class="box"><div id="loadText">Loading the 3D model…</div><div class="bar"><i id="loadBar"></i></div></div></div>
+      <div class="views">
+        <button class="ib" data-view="home" title="Reset view">Home</button>
+        <button class="ib" data-view="front">Front</button>
+        <button class="ib" data-view="top">Top</button>
+        <button class="ib hide-sm" data-view="left">Left</button>
+        <button class="ib hide-sm" data-view="right">Right</button>
+      </div>
+      <div class="pinbar"><button class="ib primary" id="pinBtn" title="Click on the model to leave a comment at that spot">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Comment on model</button></div>
+      <div class="hint" id="pinHint" hidden>Click the spot on the model you want to comment on. Press Esc to cancel.</div>
+      <div id="pins"></div>
+      <div class="caption" id="caption"></div>
+      <div class="transport">
+        <button class="ib" id="prev" title="Previous step"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="ib primary" id="play" title="Play / pause"><svg viewBox="0 0 24 24" id="playIcon"><path d="M7 5l12 7-12 7z"/></svg></button>
+        <button class="ib" id="next" title="Next step"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="ib hide-sm" id="replay" title="Replay this step"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
+        <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Position in step">
+        <span class="time" id="time">0:00</span>
+        <select class="ib" id="speed" title="Speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select>
+      </div>
+    </div>
+    <aside>
+      <div class="tabs"><button class="on" data-tab="steps">Steps</button><button data-tab="review">Review <span id="reviewCount"></span></button></div>
+      <div class="pane" id="pane-steps">
+        <div id="modeBanner"></div>
+        <ol class="steps" id="steps"></ol>
+      </div>
+      <div class="pane" id="pane-review" hidden>
+        <div id="modeBanner2"></div>
+        <div class="section"><h3>Summary</h3><div class="summary" id="summary"></div></div>
+        <div class="section"><h3>Comments on the model</h3><div id="pinList"></div></div>
+        <div class="section"><h3>Overall comments</h3><textarea id="general" placeholder="Anything about the build as a whole: timing, colours, camera, missing parts…"></textarea></div>
+        <div class="section"><h3>Open someone's review</h3><p class="meta" style="margin:0 0 8px;color:var(--muted);font-size:13px">Load a review file a reviewer sent you to see their notes on the model.</p><button class="ib" id="openFile">Open review file…</button><input type="file" id="fileInput" accept=".json,application/json" hidden></div>
+      </div>
+      <div class="footer"><button class="ib primary" id="sendBtn">Send review</button></div>
+    </aside>
+  </div>
+</div>
+
+<dialog id="nameDlg"><form method="dialog" class="dbody">
+  <h2>Review this build</h2>
+  <p>Watch each step, mark it OK or Needs change, and click on the model to leave comments at a spot. Your notes save in this browser as you go.</p>
+  <input type="text" id="nameInput" placeholder="Your name" required autocomplete="name">
+  <div class="row"><button class="ib primary" value="ok">Start reviewing</button></div>
+</form></dialog>
+
+<dialog id="pinDlg"><form method="dialog" class="dbody">
+  <h2 id="pinDlgTitle">Comment</h2>
+  <p id="pinDlgMeta"></p>
+  <textarea id="pinText" placeholder="What should change here?" required></textarea>
+  <div class="row"><button class="ib" value="cancel" formnovalidate>Cancel</button><button class="ib primary" value="save">Save comment</button></div>
+</form></dialog>
+
+<dialog id="sendDlg"><div class="dbody">
+  <h2>Send your review</h2>
+  <p id="sendSummary"></p>
+  <div class="row" style="flex-direction:column">
+    <button class="ib primary" id="copyLink">Copy review link</button>
+    <button class="ib" id="emailBtn">Email the review</button>
+    <button class="ib" id="downloadBtn">Download review file</button>
+    <button class="ib" id="copyText">Copy as text</button>
+    <a class="ib" id="issueBtn" target="_blank" rel="noopener">Post as a GitHub issue</a>
+  </div>
+  <p style="margin-top:12px;font-size:13px">The link holds your whole review. Whoever opens it sees your comments pinned on the model.</p>
+  <div class="row"><button class="ib" id="closeSend">Close</button></div>
+</div></dialog>
+
+<div class="toast" id="toast"></div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three'
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js'
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
+const $ = (id) => document.getElementById(id)
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]))
+const toast = (msg) => { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 2600) }
+const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
+const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} } }
+
+// ---------- config ----------
+const site = await fetch('models.json').then((r) => r.json())
+const params = new URLSearchParams(location.search)
+const modelMeta = site.models.find((m) => m.id === params.get('m')) || site.models[0]
+const base = `models/${modelMeta.id}/`
+const lesson = await fetch(base + 'lesson.json').then((r) => r.json())
+$('title').textContent = lesson.title
+document.title = `${lesson.title} · Review`
+
+// ---------- review state ----------
+const KEY = `glb-review:${modelMeta.id}`
+let mine = store.get(KEY) || { model: modelMeta.id, title: lesson.title, reviewer: store.get('glb-review:name') || '', steps: {}, pins: [], general: '' }
+let viewing = null // a review opened from a link or file, shown read-only
+const active = () => viewing || mine
+const save = () => { mine.updatedAt = new Date().toISOString(); store.set(KEY, mine); renderAll() }
+
+async function encodeReview(r) {
+  const bytes = new TextEncoder().encode(JSON.stringify(r))
+  let out = bytes, tag = 'j'
+  if ('CompressionStream' in window) {
+    out = new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer()); tag = 'z'
+  }
+  let bin = ''; out.forEach((b) => { bin += String.fromCharCode(b) })
+  return tag + btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+}
+async function decodeReview(s) {
+  const tag = s[0]; const b64 = s.slice(1).replace(/-/g, '+').replace(/_/g, '/')
+  const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))
+  const text = tag === 'z' ? await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).text() : new TextDecoder().decode(bytes)
+  return JSON.parse(text)
+}
+function sanitizeReview(r) {
+  if (!r || typeof r !== 'object') throw new Error('bad')
+  return {
+    model: String(r.model || ''), title: String(r.title || ''), reviewer: String(r.reviewer || 'Unnamed reviewer').slice(0, 80), updatedAt: r.updatedAt,
+    general: String(r.general || ''),
+    steps: Object.fromEntries(Object.entries(r.steps || {}).filter(([k]) => /^\d+$/.test(k)).map(([k, v]) => [k, { verdict: ['ok', 'change'].includes(v?.verdict) ? v.verdict : '', note: String(v?.note || '') }])),
+    pins: (Array.isArray(r.pins) ? r.pins : []).filter((p) => Array.isArray(p.p) && p.p.length === 3 && p.p.every(Number.isFinite)).map((p) => ({
+      id: String(p.id || Math.random()), step: Number(p.step) || 0, t: Number(p.t) || 0, p: p.p, part: String(p.part || ''), note: String(p.note || ''),
+      cam: p.cam && Array.isArray(p.cam.pos) && Array.isArray(p.cam.target) ? { pos: p.cam.pos.map(Number), target: p.cam.target.map(Number) } : null,
+    })),
+  }
+}
+
+// ---------- three ----------
+const stageEl = $('stage')
+const renderer = new THREE.WebGLRenderer({ antialias: true })
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
+renderer.toneMapping = THREE.ACESFilmicToneMapping
+renderer.outputColorSpace = THREE.SRGBColorSpace
+stageEl.prepend(renderer.domElement)
+const scene = new THREE.Scene()
+scene.background = new THREE.Color('#eae6e0')
+scene.add(new THREE.AmbientLight(0xffffff, 1.35))
+const sun = new THREE.DirectionalLight(0xffffff, 2); sun.position.set(5, 10, 7); scene.add(sun)
+const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 1000)
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.enableDamping = true
+controls.minPolarAngle = THREE.MathUtils.degToRad(0.5)
+controls.maxPolarAngle = THREE.MathUtils.degToRad(87)
+// Step 0 turns the finished build a full circle about its own centre, as the classroom player does.
+const pivot = new THREE.Group(), holder = new THREE.Group(), root = new THREE.Group()
+scene.add(root); root.add(pivot); pivot.add(holder)
+
+function resize() {
+  const r = stageEl.getBoundingClientRect()
+  renderer.setSize(r.width, r.height, false)
+  camera.aspect = r.width / Math.max(r.height, 1); camera.updateProjectionMatrix()
+}
+new ResizeObserver(resize).observe(stageEl); resize()
+
+// ---------- load model with progress ----------
+async function fetchWithProgress(url) {
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('Could not load the model')
+  const total = Number(res.headers.get('content-length')) || 0
+  if (!res.body || !total) return res.arrayBuffer()
+  const reader = res.body.getReader(); const chunks = []; let got = 0
+  for (;;) {
+    const { done, value } = await reader.read(); if (done) break
+    chunks.push(value); got += value.length
+    $('loadBar').style.width = `${Math.min(100, (got / total) * 100)}%`
+    $('loadText').textContent = `Loading the 3D model… ${Math.round(got / 1048576)} of ${Math.round(total / 1048576)} MB`
+  }
+  const buf = new Uint8Array(got); let o = 0; for (const c of chunks) { buf.set(c, o); o += c.length }
+  return buf.buffer
+}
+const manager = new THREE.LoadingManager()
+// Same rule as the classroom player: the model must be self-contained.
+manager.setURLModifier((u) => (u.startsWith('data:') || u.startsWith('blob:') ? u : 'data:,'))
+let gltf
+try {
+  const buf = await fetchWithProgress(base + 'model.glb')
+  $('loadText').textContent = 'Preparing the model…'
+  gltf = await new GLTFLoader(manager).parseAsync(buf, '')
+} catch (e) {
+  $('loadText').textContent = 'The model could not be loaded. Please refresh the page.'
+  throw e
+}
+holder.add(gltf.scene)
+const mixer = new THREE.AnimationMixer(gltf.scene)
+const clip = gltf.animations[0]
+const action = mixer.clipAction(clip); action.setLoop(THREE.LoopOnce); action.clampWhenFinished = true; action.play(); action.paused = true
+const duration = clip.duration
+
+// ---------- steps ----------
+const { fps, introFrames, framesPerStep } = lesson
+const steps = [{ step: 0, part: '', bom: '', instruction: 'The finished build.', start: 0, end: Math.min(introFrames / fps, duration) }]
+for (const s of lesson.steps) {
+  const start = (introFrames + (s.step - 1) * framesPerStep) / fps
+  steps.push({ ...s, start: Math.min(start, duration), end: Math.min(start + framesPerStep / fps, duration) })
+}
+let cur = 0, playing = false, speed = 1, time = 0
+function setTime(t) { time = THREE.MathUtils.clamp(t, 0, duration); action.time = time; mixer.update(0) }
+
+// Frame on the finished build at the end of step 0.
+setTime(steps[0].end * 0.5)
+gltf.scene.updateWorldMatrix(true, true)
+const box = new THREE.Box3().setFromObject(gltf.scene)
+root.position.y = -box.min.y
+box.setFromObject(root)
+const center = box.getCenter(new THREE.Vector3()), size = box.getSize(new THREE.Vector3())
+pivot.position.copy(center).sub(root.position); holder.position.copy(center).sub(root.position).negate()
+function fitDistance() {
+  const radius = size.length() / 2, vf = THREE.MathUtils.degToRad(camera.fov)
+  const hf = 2 * Math.atan(Math.tan(vf / 2) * camera.aspect)
+  return (radius / Math.sin(Math.min(vf, hf) / 2)) * 1.15
+}
+const VIEWS = { home: [1, 1, 1], front: [0, 1, 1], top: [0, 1, 0.0001], left: [-1, 1, 0], right: [1, 1, 0] }
+function frame(view = 'home') {
+  const d = fitDistance()
+  const target = center.clone(); target.y -= 2 * d * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * 0.13
+  const dir = new THREE.Vector3(...VIEWS[view]).normalize()
+  if (view === 'home') dir.set(1, 0, 1).normalize().add(new THREE.Vector3(0, 1, 0)).normalize()
+  camera.position.copy(target).addScaledVector(dir, d)
+  camera.near = Math.max(d / 100, 0.01); camera.far = d * 100; camera.updateProjectionMatrix()
+  controls.target.copy(target); controls.minDistance = d * 0.115; controls.maxDistance = d * 2.4; controls.update()
+}
+frame()
+$('loading').remove()
+
+function goStep(i, autoplay = true) {
+  cur = THREE.MathUtils.clamp(i, 0, steps.length - 1)
+  setTime(steps[cur].start)
+  playing = autoplay; renderAll()
+  document.querySelector(`.step[data-i="${cur}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+}
+
+// ---------- render loop ----------
+const clock = new THREE.Clock()
+const projV = new THREE.Vector3()
+renderer.setAnimationLoop(() => {
+  const dt = clock.getDelta()
+  if (playing) {
+    const s = steps[cur]
+    let t = time + dt * speed
+    if (t >= s.end) { t = s.end; playing = false; updateTransport() }
+    setTime(t)
+  }
+  const s0 = steps[0]
+  pivot.rotation.y = time < s0.end ? (time / s0.end) * Math.PI * 2 : 0
+  controls.update()
+  renderer.render(scene, camera)
+  updateScrub()
+  placePins()
+})
+
+// ---------- pins ----------
+let pinMode = false, pendingPin = null
+const pinsEl = $('pins')
+function visiblePins() {
+  const r = active()
+  return r.pins.map((p, n) => ({ ...p, n: n + 1 })).filter((p) => p.step === cur)
+}
+function placePins() {
+  const r = stageEl.getBoundingClientRect()
+  holder.updateWorldMatrix(true, false)
+  for (const el of pinsEl.children) {
+    projV.fromArray(JSON.parse(el.dataset.p)).applyMatrix4(holder.matrixWorld).project(camera)
+    const hidden = projV.z > 1
+    el.style.display = hidden ? 'none' : ''
+    el.style.left = `${(projV.x * 0.5 + 0.5) * r.width}px`
+    el.style.top = `${(-projV.y * 0.5 + 0.5) * r.height}px`
+  }
+}
+function renderPins() {
+  pinsEl.innerHTML = visiblePins().map((p) => `<div class="pin${viewing ? ' other' : ''}" data-id="${esc(p.id)}" data-p="${esc(JSON.stringify(p.p))}" title="${esc(p.note)}"><span><i>${p.n}</i></span></div>`).join('')
+  for (const el of pinsEl.children) el.onclick = () => { switchTab('review'); document.querySelector(`.pinrow[data-id="${CSS.escape(el.dataset.id)}"]`)?.scrollIntoView({ block: 'center', behavior: 'smooth' }) }
+}
+function setPinMode(on) {
+  if (viewing && on) { toast('You are viewing someone else\'s review. Go back to your own review to add comments.'); return }
+  pinMode = on; stageEl.classList.toggle('pinning', on); $('pinHint').hidden = !on; $('pinBtn').classList.toggle('on', on)
+  if (on) playing = false, updateTransport()
+}
+$('pinBtn').onclick = () => setPinMode(!pinMode)
+addEventListener('keydown', (e) => { if (e.key === 'Escape') setPinMode(false) })
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2()
+let downAt = null
+renderer.domElement.addEventListener('pointerdown', (e) => { downAt = [e.clientX, e.clientY] })
+renderer.domElement.addEventListener('pointerup', (e) => {
+  if (!pinMode || !downAt || Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 6) return
+  const r = renderer.domElement.getBoundingClientRect()
+  ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1)
+  ray.setFromCamera(ndc, camera)
+  const targets = []
+  gltf.scene.traverse((o) => { if (o.isMesh && o.visible && Math.abs(o.matrixWorld.determinant()) > 1e-12) targets.push(o) })
+  const hit = ray.intersectObjects(targets, false)[0]
+  if (!hit) { toast('Click on the model itself.'); return }
+  let part = hit.object, name = ''
+  while (part && part !== gltf.scene) { if (part.name && !/^(mesh|Object)_?\d*$/i.test(part.name)) { name = part.name; break } part = part.parent }
+  holder.updateWorldMatrix(true, false)
+  const local = holder.worldToLocal(hit.point.clone())
+  pendingPin = { id: Date.now().toString(36), step: cur, t: time, p: local.toArray().map((v) => +v.toFixed(5)), part: name.replace(/_/g, ' ').replace(/\.\d+$/, ''), note: '',
+    cam: { pos: camera.position.toArray().map((v) => +v.toFixed(4)), target: controls.target.toArray().map((v) => +v.toFixed(4)) } }
+  openPinDialog(pendingPin)
+  setPinMode(false)
+})
+function openPinDialog(p, editing = false) {
+  $('pinDlgTitle').textContent = editing ? 'Edit comment' : 'New comment'
+  $('pinDlgMeta').textContent = `${cur === 0 && p.step === 0 ? 'Finished build' : `Step ${p.step}`}${p.part ? ` · on ${p.part}` : ''}`
+  $('pinText').value = p.note
+  $('pinDlg').dataset.editing = editing ? p.id : ''
+  $('pinDlg').showModal(); $('pinText').focus()
+}
+$('pinDlg').addEventListener('close', () => {
+  const dlg = $('pinDlg')
+  if (dlg.returnValue !== 'save') { pendingPin = null; return }
+  const text = $('pinText').value.trim(); if (!text) return
+  if (dlg.dataset.editing) { const p = mine.pins.find((x) => x.id === dlg.dataset.editing); if (p) p.note = text }
+  else if (pendingPin) { pendingPin.note = text; mine.pins.push(pendingPin); pendingPin = null; toast('Comment saved') }
+  save()
+})
+function jumpToPin(p) {
+  cur = p.step; setTime(p.t); playing = false
+  if (p.cam) { camera.position.fromArray(p.cam.pos); controls.target.fromArray(p.cam.target); controls.update() }
+  renderAll()
+}
+
+// ---------- UI ----------
+function stepLabel(i) { return i === 0 ? 'Finished build' : `Step ${i}` }
+function renderSteps() {
+  const r = active()
+  $('steps').innerHTML = steps.map((s, i) => {
+    const v = r.steps[i] || {}
+    const pinCount = r.pins.filter((p) => p.step === i).length
+    const badges = `${v.verdict === 'ok' ? '<span class="badge ok">OK</span>' : v.verdict === 'change' ? '<span class="badge change">Needs change</span>' : ''}${pinCount ? `<span class="badge pins">${pinCount} pin${pinCount > 1 ? 's' : ''}</span>` : ''}`
+    const body = i === cur ? (viewing
+      ? (v.note ? `<p style="margin:8px 0 0;white-space:pre-wrap">${esc(v.note)}</p>` : '')
+      : `<div class="verdict"><button class="ib ${v.verdict === 'ok' ? 'ok-on' : ''}" data-v="ok">✓ OK</button><button class="ib ${v.verdict === 'change' ? 'on' : ''}" data-v="change">Needs change</button></div>
+         <textarea data-note placeholder="Notes on this step (hole numbers, part, wording, animation)…">${esc(v.note || '')}</textarea>`) : ''
+    return `<li class="step${i === cur ? ' active' : ''}" data-i="${i}"><div class="top"><span class="n">${i}</span><div class="t">${esc(s.instruction)}${s.part ? `<div class="meta">${esc(s.part)} · ${esc(s.bom)}</div>` : ''}</div>${badges}</div>${body}</li>`
+  }).join('')
+  for (const li of $('steps').children) {
+    li.addEventListener('click', (e) => { if (e.target.closest('.verdict,textarea')) return; const i = +li.dataset.i; if (i !== cur) goStep(i) })
+  }
+  const act = $('steps').querySelector('.step.active')
+  act?.querySelectorAll('[data-v]').forEach((b) => b.onclick = () => {
+    const s = (mine.steps[cur] ||= { verdict: '', note: '' }); s.verdict = s.verdict === b.dataset.v ? '' : b.dataset.v; save()
+  })
+  const ta = act?.querySelector('[data-note]')
+  if (ta) ta.oninput = () => { (mine.steps[cur] ||= { verdict: '', note: '' }).note = ta.value; mine.updatedAt = new Date().toISOString(); store.set(KEY, mine); renderSummary() }
+}
+function counts(r) {
+  const v = Object.values(r.steps)
+  return { ok: v.filter((x) => x.verdict === 'ok').length, change: v.filter((x) => x.verdict === 'change').length, pins: r.pins.length, total: steps.length }
+}
+function renderSummary() {
+  const r = active(), c = counts(r)
+  $('summary').innerHTML = `<span class="badge ok">${c.ok} OK</span><span class="badge change">${c.change} need change</span><span class="badge pins">${c.pins} comment${c.pins === 1 ? '' : 's'} on model</span><span>${c.total - c.ok - c.change} of ${c.total} steps not marked</span>`
+  $('reviewCount').textContent = c.pins + c.change ? `(${c.pins + c.change})` : ''
+}
+function renderPinList() {
+  const r = active()
+  $('pinList').innerHTML = r.pins.length ? r.pins.map((p, n) => `<div class="pinrow" data-id="${esc(p.id)}"><span class="num">${n + 1}</span><div class="body"><div class="meta" style="font-size:12px;color:var(--muted)">${stepLabel(p.step)}${p.part ? ` · ${esc(p.part)}` : ''}</div><p>${esc(p.note)}</p><div class="actions"><button class="link" data-go>Show on model</button>${viewing ? '' : '<button class="link" data-edit>Edit</button><button class="link" data-del>Delete</button>'}</div></div></div>`).join('')
+    : '<p style="margin:0;color:var(--muted);font-size:13px">No comments yet. Use “Comment on model”, then click a spot on the model.</p>'
+  for (const row of $('pinList').querySelectorAll('.pinrow')) {
+    const p = r.pins.find((x) => x.id === row.dataset.id)
+    row.querySelector('[data-go]').onclick = () => jumpToPin(p)
+    const ed = row.querySelector('[data-edit]'); if (ed) ed.onclick = () => openPinDialog(p, true)
+    const del = row.querySelector('[data-del]'); if (del) del.onclick = () => { if (confirm('Delete this comment?')) { mine.pins = mine.pins.filter((x) => x !== p); save() } }
+  }
+}
+function renderBanner() {
+  const html = viewing
+    ? `<div class="banner moss">You are viewing <b>${esc(viewing.reviewer)}</b>'s review${viewing.updatedAt ? ` from ${new Date(viewing.updatedAt).toLocaleString()}` : ''}. It is read-only.<br><button class="ib" data-back>Back to my own review</button></div>`
+    : (lesson.note ? `<div class="banner">${esc(lesson.note)}${lesson.partsSummary ? `<br><b>Parts:</b> ${esc(lesson.partsSummary)}` : ''}</div>` : '')
+  for (const id of ['modeBanner', 'modeBanner2']) { $(id).innerHTML = html; const b = $(id).querySelector('[data-back]'); if (b) b.onclick = () => { viewing = null; history.replaceState(null, '', location.pathname + location.search); renderAll() } }
+  $('general').value = active().general || ''; $('general').readOnly = !!viewing
+  $('who').textContent = viewing ? `Viewing: ${viewing.reviewer}` : (mine.reviewer ? `Reviewer: ${mine.reviewer}` : '')
+  $('sendBtn').hidden = !!viewing
+}
+$('general').oninput = () => { if (!viewing) { mine.general = $('general').value; store.set(KEY, mine) } }
+function updateTransport() {
+  $('playIcon').innerHTML = playing ? '<path d="M8 5v14M16 5v14"/>' : '<path d="M7 5l12 7-12 7z"/>'
+  const s = steps[cur]
+  $('caption').innerHTML = `<b>${stepLabel(cur)}</b>${esc(s.instruction)}${s.part ? `<small>${esc(s.part)} · ${esc(s.bom)}</small>` : ''}`
+}
+function updateScrub() {
+  const s = steps[cur]; const len = s.end - s.start || 1
+  if (!scrubbing) $('scrub').value = Math.round(((time - s.start) / len) * 1000)
+  $('time').textContent = `${fmt(time - s.start)} / ${fmt(len)}`
+}
+function renderAll() { renderSteps(); renderSummary(); renderPinList(); renderPins(); renderBanner(); updateTransport() }
+
+let scrubbing = false
+$('scrub').addEventListener('input', () => { scrubbing = true; playing = false; const s = steps[cur]; setTime(s.start + ($('scrub').value / 1000) * (s.end - s.start)); updateTransport() })
+$('scrub').addEventListener('change', () => { scrubbing = false })
+$('play').onclick = () => { if (!playing && time >= steps[cur].end - 1e-3) setTime(steps[cur].start); playing = !playing; updateTransport() }
+$('prev').onclick = () => goStep(cur - 1)
+$('next').onclick = () => goStep(cur + 1)
+$('replay').onclick = () => goStep(cur)
+$('speed').onchange = () => { speed = +$('speed').value }
+document.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => frame(b.dataset.view))
+function switchTab(t) { document.querySelectorAll('.tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t)); $('pane-steps').hidden = t !== 'steps'; $('pane-review').hidden = t !== 'review' }
+document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => switchTab(b.dataset.tab))
+addEventListener('keydown', (e) => {
+  if (e.target.closest('input,textarea,select,dialog')) return
+  if (e.key === ' ') { e.preventDefault(); $('play').click() } else if (e.key === 'ArrowRight') goStep(cur + 1) else if (e.key === 'ArrowLeft') goStep(cur - 1)
+})
+
+// ---------- send / open ----------
+function reviewText(r) {
+  const lines = [`Review of ${lesson.title}`, `Reviewer: ${r.reviewer || 'Unnamed'}`, '']
+  steps.forEach((s, i) => {
+    const v = r.steps[i]; const pins = r.pins.filter((p) => p.step === i)
+    if (!v?.verdict && !v?.note && !pins.length) return
+    lines.push(`${stepLabel(i)}: ${v?.verdict === 'ok' ? 'OK' : v?.verdict === 'change' ? 'NEEDS CHANGE' : 'not marked'}${s.part ? ` (${s.part})` : ''}`)
+    if (v?.note) lines.push(`  Note: ${v.note}`)
+    pins.forEach((p) => lines.push(`  Pin #${r.pins.indexOf(p) + 1}${p.part ? ` on ${p.part}` : ''}: ${p.note}`))
+  })
+  const c = counts(r); const unmarked = steps.map((_, i) => i).filter((i) => !r.steps[i]?.verdict)
+  if (unmarked.length) lines.push('', `Not marked: ${unmarked.map(stepLabel).join(', ')}`)
+  if (r.general) lines.push('', 'Overall:', r.general)
+  lines.push('', `${c.ok} OK, ${c.change} need change, ${c.pins} comments on the model.`)
+  return lines.join('\n')
+}
+async function reviewLink() {
+  const u = new URL(location.href); u.hash = 'review=' + await encodeReview(mine); return u.toString()
+}
+$('sendBtn').onclick = async () => {
+  if (!mine.reviewer) { askName(); return }
+  const c = counts(mine)
+  $('sendSummary').textContent = `${c.ok} steps OK, ${c.change} need change, ${c.pins} comments on the model.${c.total - c.ok - c.change ? ` ${c.total - c.ok - c.change} steps are not marked yet.` : ''}`
+  const link = await reviewLink()
+  const body = reviewText(mine) + `\n\nOpen the review on the model:\n${link}`
+  $('issueBtn').hidden = !site.githubRepo
+  if (site.githubRepo) {
+    let issueBody = body; if (issueBody.length > 6000) issueBody = reviewText(mine).slice(0, 5500) + '\n…\n\nDownload the full review file from the viewer.'
+    $('issueBtn').href = `https://github.com/${site.githubRepo}/issues/new?title=${encodeURIComponent(`Review: ${lesson.title} by ${mine.reviewer}`)}&body=${encodeURIComponent(issueBody)}`
+  }
+  $('emailBtn').onclick = () => { location.href = `mailto:${encodeURIComponent(site.reviewEmail || '')}?subject=${encodeURIComponent(`Review: ${lesson.title}`)}&body=${encodeURIComponent(body.length > 1800 ? reviewText(mine).slice(0, 1500) + '\n…\n\nFull review: ' + link : body)}` }
+  $('copyLink').onclick = async () => { await navigator.clipboard.writeText(link); toast('Review link copied. Paste it in an email or chat.') }
+  $('copyText').onclick = async () => { await navigator.clipboard.writeText(body); toast('Review copied as text.') }
+  $('downloadBtn').onclick = () => {
+    const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(mine, null, 1)], { type: 'application/json' }))
+    a.download = `Review - ${modelMeta.id} - ${mine.reviewer.replace(/[^\w -]/g, '')}.json`; a.click(); URL.revokeObjectURL(a.href)
+  }
+  $('sendDlg').showModal()
+}
+$('closeSend').onclick = () => $('sendDlg').close()
+$('openFile').onclick = () => $('fileInput').click()
+$('fileInput').onchange = async () => {
+  const f = $('fileInput').files[0]; if (!f) return
+  try { viewing = sanitizeReview(JSON.parse(await f.text())); goStep(0, false); switchTab('review'); toast(`Showing ${viewing.reviewer}'s review`) } catch { toast('That file is not a review file.') }
+  $('fileInput').value = ''
+}
+function askName() {
+  $('nameInput').value = mine.reviewer || ''
+  $('nameDlg').showModal()
+}
+$('nameDlg').addEventListener('close', () => { const n = $('nameInput').value.trim(); if (n) { mine.reviewer = n; store.set('glb-review:name', n); save() } })
+
+const h = location.hash.match(/review=([\w-]+)/)
+if (h) {
+  try { viewing = sanitizeReview(await decodeReview(h[1])); switchTab('review') } catch { toast('That review link is damaged.') }
+}
+goStep(0, true)
+if (!viewing && !mine.reviewer) askName()
+</script>
+</body>
+</html>
