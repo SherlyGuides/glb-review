@@ -214,11 +214,11 @@ const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(
 const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)) } catch { return null } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)) } catch {} } }
 
 // ---------- config ----------
-const site = await fetch('models.json').then((r) => r.json())
+const site = await fetch('models.json', { cache: 'no-cache' }).then((r) => r.json())
 const params = new URLSearchParams(location.search)
 const modelMeta = site.models.find((m) => m.id === params.get('m')) || site.models[0]
 const base = `models/${modelMeta.id}/`
-const lesson = await fetch(base + 'lesson.json').then((r) => r.json())
+const lesson = await fetch(base + 'lesson.json', { cache: 'no-cache' }).then((r) => r.json())
 $('title').textContent = lesson.title
 document.title = `${lesson.title} · Review`
 
