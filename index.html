@@ -528,7 +528,7 @@ function switchTab(t) { document.querySelectorAll('.tabs button').forEach((b) =>
 document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => switchTab(b.dataset.tab))
 addEventListener('keydown', (e) => {
   if (e.target.closest('input,textarea,select,dialog')) return
-  if (e.key === ' ') { e.preventDefault(); $('play').click() } else if (e.key === 'ArrowRight') goStep(cur + 1) else if (e.key === 'ArrowLeft') goStep(cur - 1)
+  if (e.key === ' ') { e.preventDefault(); $('play').click() } else if (e.key === 'ArrowRight') { goStep(cur + 1) } else if (e.key === 'ArrowLeft') { goStep(cur - 1) }
 })
 
 // ---------- send / open ----------
