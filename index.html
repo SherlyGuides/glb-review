@@ -44,6 +44,7 @@ header .who{font-size:13px;color:#b3a89c;white-space:nowrap}
 .ib.primary:hover{background:var(--rust-600)}
 .ib.on{background:var(--rust-050);border-color:var(--rust-400);color:var(--rust-600)}
 .ib svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.speed{display:inline-flex;align-items:center;gap:6px;color:var(--muted)}.speed svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}.speed input{width:96px;accent-color:var(--rust-500)}
 .time{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted);white-space:nowrap}
 .views{position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap}
 .pinbar{position:absolute;top:12px;right:12px;display:flex;gap:6px;align-items:center}
@@ -128,9 +129,6 @@ dialog .row .ib{flex:1;height:42px}
   <div class="main">
     <div class="stage" id="stage">
       <div class="loading" id="loading"><div class="box"><div id="loadText">Loading the 3D model…</div><div class="bar"><i id="loadBar"></i></div></div></div>
-      <div class="pinbar"><button class="ib primary" id="pinBtn" title="Click on the model to leave a comment at that spot">
-        <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Comment on model</button></div>
-      <div class="hint" id="pinHint" hidden>Click the spot on the model you want to comment on. Press Esc to cancel.</div>
       <div id="pins"></div>
       <div class="caption" id="caption"></div>
       <div class="transport">
@@ -140,7 +138,8 @@ dialog .row .ib{flex:1;height:42px}
         <button class="ib hide-sm" id="replay" title="Replay this step"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg></button>
         <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Position in step">
         <span class="time" id="time">0:00</span>
-        <select class="ib" id="speed" title="Speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option><option value="4">4×</option></select>
+        <button class="ib on" id="auto" title="Play the next step automatically" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M5 5l7 7-7 7"/><path d="M13 5l7 7-7 7"/></svg></button>
+        <label class="speed" title="Speed"><svg viewBox="0 0 24 24"><path d="M12 14l4-4"/><path d="M3.3 19a10 10 0 1 1 17.4 0"/></svg><input type="range" id="speed" min="0" max="8" step="1" value="3" aria-label="Speed"></label>
       </div>
     </div>
     <aside>
@@ -152,7 +151,7 @@ dialog .row .ib{flex:1;height:42px}
       <div class="pane" id="pane-review" hidden>
         <div id="modeBanner2"></div>
         <div class="section"><h3>Summary</h3><div class="summary" id="summary"></div></div>
-        <div class="section"><h3>Comments on the model</h3><div id="pinList"></div></div>
+        <div class="section" id="pinSection"><h3>Comments on the model</h3><div id="pinList"></div></div>
         <div class="section"><h3>Overall comments</h3><textarea id="general" placeholder="Anything about the build as a whole: timing, colours, camera, missing parts…"></textarea></div>
         <div class="section"><h3>Open someone's review</h3><p class="meta" style="margin:0 0 8px;color:var(--muted);font-size:13px">Load a review file a reviewer sent you to see their notes on the model.</p><button class="ib" id="openFile">Open review file…</button><input type="file" id="fileInput" accept=".json,application/json" hidden></div>
       </div>
@@ -265,7 +264,6 @@ const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 controls.minPolarAngle = THREE.MathUtils.degToRad(0.5)
 controls.maxPolarAngle = THREE.MathUtils.degToRad(87)
-// Step 0 turns the finished build a full circle about its own centre, as the classroom player does.
 const pivot = new THREE.Group(), holder = new THREE.Group(), root = new THREE.Group()
 scene.add(root); root.add(pivot); pivot.add(holder)
 
@@ -317,7 +315,7 @@ for (const s of lesson.steps) {
   const start = (introFrames + (s.step - 1) * framesPerStep) / fps
   steps.push({ ...s, start: Math.min(start, duration), end: Math.min(start + framesPerStep / fps, duration) })
 }
-let cur = 0, playing = false, speed = 1, time = 0
+let cur = 0, playing = false, speed = 1, time = 0, autoNext = true
 function setTime(t) { time = THREE.MathUtils.clamp(t, 0, duration); action.time = time; mixer.update(0) }
 
 // Frame on the finished build at the end of step 0.
@@ -361,11 +359,10 @@ renderer.setAnimationLoop(() => {
   if (playing) {
     const s = steps[cur]
     let t = time + dt * speed
-    if (t >= s.end) { t = s.end; playing = false; updateTransport() }
-    setTime(t)
+    if (t >= s.end && autoNext && cur < steps.length - 1) { cur += 1; setTime(steps[cur].start); renderAll(); document.querySelector(`.step[data-i="${cur}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' }) }
+    else { if (t >= s.end) { t = s.end; playing = false; updateTransport() }
+    setTime(t) }
   }
-  const s0 = steps[0]
-  pivot.rotation.y = time < s0.end ? (time / s0.end) * Math.PI * 2 : 0
   controls.update()
   renderer.render(scene, camera)
   updateScrub()
@@ -396,10 +393,9 @@ function renderPins() {
 }
 function setPinMode(on) {
   if (viewing && on) { toast('You are viewing someone else\'s review. Go back to your own review to add comments.'); return }
-  pinMode = on; stageEl.classList.toggle('pinning', on); $('pinHint').hidden = !on; $('pinBtn').classList.toggle('on', on)
+  pinMode = on; stageEl.classList.toggle('pinning', on); 
   if (on) playing = false, updateTransport()
 }
-$('pinBtn').onclick = () => setPinMode(!pinMode)
 addEventListener('keydown', (e) => { if (e.key === 'Escape') setPinMode(false) })
 const ray = new THREE.Raycaster(), ndc = new THREE.Vector2()
 let downAt = null
@@ -479,7 +475,8 @@ function renderSummary() {
 function renderPinList() {
   const r = active()
   $('pinList').innerHTML = r.pins.length ? r.pins.map((p, n) => `<div class="pinrow" data-id="${esc(p.id)}"><span class="num">${n + 1}</span><div class="body"><div class="meta" style="font-size:12px;color:var(--muted)">${stepLabel(p.step)}${p.part ? ` · ${esc(p.part)}` : ''}</div><p>${esc(p.note)}</p><div class="actions"><button class="link" data-go>Show on model</button>${viewing ? '' : '<button class="link" data-edit>Edit</button><button class="link" data-del>Delete</button>'}</div></div></div>`).join('')
-    : '<p style="margin:0;color:var(--muted);font-size:13px">No comments yet. Use “Comment on model”, then click a spot on the model.</p>'
+    : ''
+  $('pinSection').hidden = !r.pins.length
   for (const row of $('pinList').querySelectorAll('.pinrow')) {
     const p = r.pins.find((x) => x.id === row.dataset.id)
     row.querySelector('[data-go]').onclick = () => jumpToPin(p)
@@ -516,7 +513,10 @@ $('play').onclick = () => { if (!playing && time >= steps[cur].end - 1e-3) setTi
 $('prev').onclick = () => goStep(cur - 1)
 $('next').onclick = () => goStep(cur + 1)
 $('replay').onclick = () => goStep(cur)
-$('speed').onchange = () => { speed = +$('speed').value }
+// Slider positions map to these rates; 1× sits at position 3.
+const SPEEDS = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 8]
+$('speed').oninput = () => { speed = SPEEDS[+$('speed').value] }
+$('auto').onclick = () => { autoNext = !autoNext; $('auto').classList.toggle('on', autoNext); $('auto').setAttribute('aria-pressed', autoNext) }
 document.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => frame(b.dataset.view))
 function switchTab(t) { document.querySelectorAll('.tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t)); $('pane-steps').hidden = t !== 'steps'; $('pane-review').hidden = t !== 'review' }
 document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => switchTab(b.dataset.tab))
