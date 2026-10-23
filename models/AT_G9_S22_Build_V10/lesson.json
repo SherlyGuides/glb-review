@@ -1,0 +1,308 @@
+{
+ "title": "Grade 9 \u00b7 Session 22 \u00b7 Build V10",
+ "fps": 24,
+ "introFrames": 700,
+ "framesPerStep": 700,
+ "note": "Holes are counted from the left, the front or the bottom, as the finished model faces the camera: motor on the right, blue front frame at the front.",
+ "partsSummary": "45 parts: 26 Friction Pegs (black); one each of DC Motor (grey), Axle 4 (black), Axle 9 (light grey), 40 Tooth Gear (light grey), 8 Tooth Gear (dark grey), 24 Tooth Gear (yellow), Perpendicular Axle Joiner 3L with Pegs (light grey), 5x11 Plate (light grey), 15x5 Block (blue), 7x7 Block (white), 11x5 H Block (blue), Beam 11 (blue), Beam 5 (blue); two each of Beam 9 (red), 16 Tooth Gear (tan), 10x5 Block (light grey).",
+ "steps": [
+  {
+   "step": 1,
+   "part": "Motor 1",
+   "bom": "DC Motor (grey)",
+   "instruction": "Hold the motor with its shaft pointing left, as shown."
+  },
+  {
+   "step": 2,
+   "part": "Peg 27",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the motor face, in the hole behind the shaft."
+  },
+  {
+   "step": 3,
+   "part": "Peg 26",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the motor face, in the hole in front of the shaft."
+  },
+  {
+   "step": 4,
+   "part": "Beam 5",
+   "bom": "Beam 9 (red)",
+   "instruction": "Press the red beam onto both pegs, using holes 7 and 9 from the front."
+  },
+  {
+   "step": 5,
+   "part": "Axle 3",
+   "bom": "Axle 4 (black)",
+   "instruction": "Push the short black axle through red beam hole 8 into the motor shaft."
+  },
+  {
+   "step": 6,
+   "part": "Gear 8",
+   "bom": "16 Tooth Gear (tan)",
+   "instruction": "Slide a 16-tooth gear onto the black axle, against the red beam."
+  },
+  {
+   "step": 7,
+   "part": "Perp Joiner 1",
+   "bom": "Perpendicular Axle Joiner 3L with Pegs (light grey)",
+   "instruction": "Press the joiner's pegs into red beam holes 2 and 4 from the front."
+  },
+  {
+   "step": 8,
+   "part": "Frame 2",
+   "bom": "10x5 Block (light grey)",
+   "instruction": "Start a second assembly: stand a grey frame upright."
+  },
+  {
+   "step": 9,
+   "part": "Axle 1",
+   "bom": "Axle 9 (light grey)",
+   "instruction": "Push the long grey axle through the frame's top row, hole 7 from the front."
+  },
+  {
+   "step": 10,
+   "part": "Gear 7",
+   "bom": "16 Tooth Gear (tan)",
+   "instruction": "Slide a 16-tooth gear onto the axle's short right end, against the frame."
+  },
+  {
+   "step": 11,
+   "part": "Second assembly",
+   "bom": "",
+   "instruction": "Join both assemblies: gears mesh, axle into red beam hole 6, joiner pegs into the frame."
+  },
+  {
+   "step": 12,
+   "part": "Peg 17",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the frame's bottom row, hole 8 from the front."
+  },
+  {
+   "step": 13,
+   "part": "Peg 16",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the frame's bottom row, hole 4 from the front."
+  },
+  {
+   "step": 14,
+   "part": "Beam 2",
+   "bom": "Beam 9 (red)",
+   "instruction": "Press the second red beam onto both pegs, using holes 3 and 7."
+  },
+  {
+   "step": 15,
+   "part": "Peg 14",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the second red beam's hole 8 from the front."
+  },
+  {
+   "step": 16,
+   "part": "Peg 13",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the second red beam's hole 2 from the front."
+  },
+  {
+   "step": 17,
+   "part": "Plate 1",
+   "bom": "5x11 Plate (light grey)",
+   "instruction": "Press the plate's right side onto both pegs, using side holes 3 and 9."
+  },
+  {
+   "step": 18,
+   "part": "Gear 6",
+   "bom": "40 Tooth Gear (light grey)",
+   "instruction": "Slide the 40-tooth gear onto the long axle, all the way to the frame."
+  },
+  {
+   "step": 19,
+   "part": "Gear 4",
+   "bom": "8 Tooth Gear (dark grey)",
+   "instruction": "Slide the 8-tooth gear on, leaving a one-and-a-half-hole gap after the 40-tooth gear.",
+   "check": "Please check: is the gap between the 40-tooth and 8-tooth gears really one and a half holes?"
+  },
+  {
+   "step": 20,
+   "part": "Gear 1",
+   "bom": "24 Tooth Gear (yellow)",
+   "instruction": "Slide the 24-tooth gear on, flush with the axle's left end."
+  },
+  {
+   "step": 21,
+   "part": "Peg 5",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's left side, hole 9 from the front."
+  },
+  {
+   "step": 22,
+   "part": "Peg 4",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's left side, hole 6 from the front."
+  },
+  {
+   "step": 23,
+   "part": "Peg 3",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's left side, hole 3 from the front."
+  },
+  {
+   "step": 24,
+   "part": "Frame 1",
+   "bom": "10x5 Block (light grey)",
+   "instruction": "Press the second grey frame onto the three left pegs, using its bottom row."
+  },
+  {
+   "step": 25,
+   "part": "Whole model",
+   "bom": "",
+   "instruction": "Turn the whole model upside down."
+  },
+  {
+   "step": 26,
+   "part": "Peg 1",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's underside, second row from the front, hole 5."
+  },
+  {
+   "step": 27,
+   "part": "Peg 2",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's underside, second row from the front, hole 1."
+  },
+  {
+   "step": 28,
+   "part": "Block 1",
+   "bom": "15x5 Block (blue)",
+   "instruction": "Press the blue block onto both pegs, using its front row, holes 1 and 5."
+  },
+  {
+   "step": 29,
+   "part": "Whole model",
+   "bom": "",
+   "instruction": "Turn the whole model back the right way up."
+  },
+  {
+   "step": 30,
+   "part": "Peg 28",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the motor's back, top hole nearest the red beam.",
+   "check": "Please check: the motor's back holes are described by position, not counted."
+  },
+  {
+   "step": 31,
+   "part": "Peg 21",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the motor's back, lower hole at the far right end.",
+   "check": "Please check: the motor's back holes are described by position, not counted."
+  },
+  {
+   "step": 32,
+   "part": "Peg 29",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the motor's back, top hole at the far right end.",
+   "check": "Please check: the motor's back holes are described by position, not counted."
+  },
+  {
+   "step": 33,
+   "part": "Block 2",
+   "bom": "7x7 Block (white)",
+   "instruction": "Press the white square frame onto the three motor pegs from behind."
+  },
+  {
+   "step": 34,
+   "part": "Peg 20",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the white frame's right side, second hole from the bottom."
+  },
+  {
+   "step": 35,
+   "part": "Peg 18",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the white frame's left side, second hole from the bottom."
+  },
+  {
+   "step": 36,
+   "part": "Peg 12",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's back edge, hole 5 from the left."
+  },
+  {
+   "step": 37,
+   "part": "Peg 10",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the plate's back edge, hole 3 from the left."
+  },
+  {
+   "step": 38,
+   "part": "H Block 1",
+   "bom": "11x5 H Block (blue)",
+   "instruction": "Start the front frame assembly: lay the blue H block in front of the model."
+  },
+  {
+   "step": 39,
+   "part": "Peg 24",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the H block's back, top row, hole 5 from the left."
+  },
+  {
+   "step": 40,
+   "part": "Peg 23",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the H block's back, top row, hole 3 from the left."
+  },
+  {
+   "step": 41,
+   "part": "Beam 4",
+   "bom": "Beam 11 (blue)",
+   "instruction": "Press the blue 11 beam onto the top pegs, using holes 5 and 7."
+  },
+  {
+   "step": 42,
+   "part": "Peg 15",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the H block's back, bottom row, hole 5 from the left."
+  },
+  {
+   "step": 43,
+   "part": "Peg 11",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the H block's back, bottom row, hole 3 from the left."
+  },
+  {
+   "step": 44,
+   "part": "Beam 1",
+   "bom": "Beam 5 (blue)",
+   "instruction": "Press the blue 5 beam onto the bottom pegs, using holes 3 and 5."
+  },
+  {
+   "step": 45,
+   "part": "Peg 22",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the blue 11 beam's back, hole 1 at the left end."
+  },
+  {
+   "step": 46,
+   "part": "Peg 25",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the blue 11 beam's back, hole 8 from the left."
+  },
+  {
+   "step": 47,
+   "part": "Peg 6",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the blue 5 beam's back, hole 1 at the left end."
+  },
+  {
+   "step": 48,
+   "part": "Peg 7",
+   "bom": "Friction Peg (black)",
+   "instruction": "Push a peg into the blue 5 beam's back, hole 4 from the left."
+  },
+  {
+   "step": 49,
+   "part": "Front frame assembly",
+   "bom": "",
+   "instruction": "Push the front frame onto the model: top pegs into both grey frames, bottom pegs into the plate."
+  }
+ ]
+}

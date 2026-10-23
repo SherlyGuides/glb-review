@@ -74,6 +74,7 @@ aside{background:var(--panel);border-left:1px solid var(--line);display:flex;fle
 .step .n{font:700 15px var(--font-display);color:var(--rust-600);min-width:24px}
 .step .t{flex:1}
 .step .meta{font-size:12px;color:var(--muted)}
+.check{margin-top:4px;font-size:12px;font-weight:600;color:var(--rust-600)}
 .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .badge.ok{background:var(--moss-050);color:var(--moss-500)}
 .badge.change{background:var(--rust-050);color:var(--rust-600);border:1px solid var(--rust-400)}
@@ -451,7 +452,7 @@ function renderSteps() {
       ? (v.note ? `<p style="margin:8px 0 0;white-space:pre-wrap">${esc(v.note)}</p>` : '')
       : `<div class="verdict"><button class="ib ${v.verdict === 'ok' ? 'ok-on' : ''}" data-v="ok">✓ OK</button><button class="ib ${v.verdict === 'change' ? 'on' : ''}" data-v="change">Needs change</button></div>
          <textarea data-note placeholder="Notes on this step (hole numbers, part, wording, animation)…">${esc(v.note || '')}</textarea>`) : ''
-    return `<li class="step${i === cur ? ' active' : ''}" data-i="${i}"><div class="top"><span class="n">${i}</span><div class="t">${esc(s.instruction)}${s.part ? `<div class="meta">${esc(s.part)} · ${esc(s.bom)}</div>` : ''}</div>${badges}</div>${body}</li>`
+    return `<li class="step${i === cur ? ' active' : ''}" data-i="${i}"><div class="top"><span class="n">${i}</span><div class="t">${esc(s.instruction)}${s.part ? `<div class="meta">${esc(s.part)}${s.bom ? ` · ${esc(s.bom)}` : ''}</div>` : ''}${s.check ? `<div class="check">${esc(s.check)}</div>` : ''}</div>${badges}</div>${body}</li>`
   }).join('')
   for (const li of $('steps').children) {
     li.addEventListener('click', (e) => { if (e.target.closest('.verdict,textarea')) return; const i = +li.dataset.i; if (i !== cur) goStep(i) })
@@ -497,7 +498,7 @@ $('general').oninput = () => { if (!viewing) { mine.general = $('general').value
 function updateTransport() {
   $('playIcon').innerHTML = playing ? '<path d="M8 5v14M16 5v14"/>' : '<path d="M7 5l12 7-12 7z"/>'
   const s = steps[cur]
-  $('caption').innerHTML = `<b>${stepLabel(cur)}</b>${esc(s.instruction)}${s.part ? `<small>${esc(s.part)} · ${esc(s.bom)}</small>` : ''}`
+  $('caption').innerHTML = `<b>${stepLabel(cur)}</b>${esc(s.instruction)}${s.part ? `<small>${esc(s.part)}${s.bom ? ` · ${esc(s.bom)}` : ''}</small>` : ''}`
 }
 function updateScrub() {
   const s = steps[cur]; const len = s.end - s.start || 1
