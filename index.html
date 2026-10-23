@@ -74,6 +74,13 @@ aside{background:var(--panel);border-left:1px solid var(--line);display:flex;fle
 .step .n{font:700 15px var(--font-display);color:var(--rust-600);min-width:24px}
 .step .t{flex:1}
 .step .meta{font-size:12px;color:var(--muted)}
+.bom{width:calc(100% - 24px);margin:12px;border-collapse:collapse;font-size:14px}
+.bom caption{text-align:left;font:600 15px var(--font-display);padding:0 4px 8px}
+.bom th,.bom td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left}
+.bom th{font-size:12px;color:var(--muted);font-weight:600}
+.bom th:last-child,.bom td:last-child{text-align:right;font-variant-numeric:tabular-nums;width:56px}
+.bom tbody tr:nth-child(odd){background:var(--stone-50)}
+.bom tfoot td{font-weight:700;border-bottom:0}
 .check{margin-top:4px;font-size:12px;font-weight:600;color:var(--rust-600)}
 .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .badge.ok{background:var(--moss-050);color:var(--moss-500)}
@@ -144,11 +151,12 @@ dialog .row .ib{flex:1;height:42px}
       </div>
     </div>
     <aside>
-      <div class="tabs"><button class="on" data-tab="steps">Steps</button><button data-tab="review">Review <span id="reviewCount"></span></button></div>
+      <div class="tabs"><button class="on" data-tab="steps">Steps</button><button data-tab="bom">BOM</button><button data-tab="review">Review <span id="reviewCount"></span></button></div>
       <div class="pane" id="pane-steps">
         <div id="modeBanner"></div>
         <ol class="steps" id="steps"></ol>
       </div>
+      <div class="pane" id="pane-bom" hidden><div id="bom"></div></div>
       <div class="pane" id="pane-review" hidden>
         <div id="modeBanner2"></div>
         <div class="section"><h3>Summary</h3><div class="summary" id="summary"></div></div>
@@ -488,7 +496,7 @@ function renderPinList() {
 function renderBanner() {
   const html = viewing
     ? `<div class="banner moss">You are viewing <b>${esc(viewing.reviewer)}</b>'s review${viewing.updatedAt ? ` from ${new Date(viewing.updatedAt).toLocaleString()}` : ''}. It is read-only.<br><button class="ib" data-back>Back to my own review</button></div>`
-    : (lesson.note ? `<div class="banner">${esc(lesson.note)}${lesson.partsSummary ? `<br><b>Parts:</b> ${esc(lesson.partsSummary)}` : ''}</div>` : '')
+    : (lesson.note ? `<div class="banner">${esc(lesson.note)}</div>` : '')
   for (const id of ['modeBanner', 'modeBanner2']) { $(id).innerHTML = html; const b = $(id).querySelector('[data-back]'); if (b) b.onclick = () => { viewing = null; history.replaceState(null, '', location.pathname + location.search); renderAll() } }
   $('general').value = active().general || ''; $('general').readOnly = !!viewing
   $('who').textContent = viewing ? `Viewing: ${viewing.reviewer}` : (mine.reviewer ? `Reviewer: ${mine.reviewer}` : '')
@@ -505,6 +513,12 @@ function updateScrub() {
   if (!scrubbing) $('scrub').value = Math.round(((time - s.start) / len) * 1000)
   $('time').textContent = `${fmt(time - s.start)} / ${fmt(len)}`
 }
+function renderBom() {
+  const bom = lesson.bom || []
+  const total = bom.reduce((a, b) => a + b.qty, 0)
+  $('bom').innerHTML = bom.length ? `<table class="bom"><caption>Bill of materials · ${total} parts</caption><thead><tr><th>Part</th><th>Qty</th></tr></thead><tbody>${bom.map((b) => `<tr><td>${esc(b.name)}</td><td>${b.qty}</td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td><td>${total}</td></tr></tfoot></table>` : '<p style="padding:16px;color:var(--muted)">No bill of materials for this build.</p>'
+}
+renderBom()
 function renderAll() { renderSteps(); renderSummary(); renderPinList(); renderPins(); renderBanner(); updateTransport() }
 
 let scrubbing = false
@@ -519,7 +533,7 @@ const SPEEDS = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 8]
 $('speed').oninput = () => { speed = SPEEDS[+$('speed').value] }
 $('auto').onclick = () => { autoNext = !autoNext; $('auto').classList.toggle('on', autoNext); $('auto').setAttribute('aria-pressed', autoNext) }
 document.querySelectorAll('[data-view]').forEach((b) => b.onclick = () => frame(b.dataset.view))
-function switchTab(t) { document.querySelectorAll('.tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t)); $('pane-steps').hidden = t !== 'steps'; $('pane-review').hidden = t !== 'review' }
+function switchTab(t) { document.querySelectorAll('.tabs button').forEach((b) => b.classList.toggle('on', b.dataset.tab === t)); for (const n of ['steps', 'bom', 'review']) $('pane-' + n).hidden = t !== n }
 document.querySelectorAll('.tabs button').forEach((b) => b.onclick = () => switchTab(b.dataset.tab))
 addEventListener('keydown', (e) => {
   if (e.target.closest('input,textarea,select,dialog')) return

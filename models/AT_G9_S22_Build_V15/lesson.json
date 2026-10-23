@@ -4,7 +4,6 @@
  "introFrames": 700,
  "framesPerStep": 700,
  "note": "Holes are counted from the left, the front or the bottom, as the finished model faces the camera: motor on the right, blue front frame at the front.",
- "partsSummary": "77 parts: 36 \u00d7 Friction Peg (black); 1 \u00d7 Long Peg (black); 1 \u00d7 DC Motor (grey); 1 \u00d7 Servo Motor with holder; 2 \u00d7 Beam 9 (red); 1 \u00d7 Axle 4 (black); 1 \u00d7 Axle 9 (light grey); 1 \u00d7 Axle 16 (black); 2 \u00d7 16 Tooth Gear (tan); 2 \u00d7 40 Tooth Gear (light grey); 2 \u00d7 8 Tooth Gear (dark grey); 2 \u00d7 24 Tooth Gear (yellow); 1 \u00d7 Perpendicular Axle Joiner 3L with Pegs (light grey); 2 \u00d7 10x5 Block (light grey); 1 \u00d7 5x11 Plate (light grey); 1 \u00d7 15x5 Block (blue); 1 \u00d7 7x7 Block (white); 1 \u00d7 11x5 H Block (blue); 2 \u00d7 7x2 C Block (white); 1 \u00d7 Beam 15 (white); 1 \u00d7 Beam 11 (blue); 4 \u00d7 Beam 5 (blue); 2 \u00d7 Beam 3 (blue); 1 \u00d7 Lift Arm (dark grey); 2 \u00d7 Peg Joiner (white); 4 \u00d7 Half Bush (yellow); 1 \u00d7 Hole Pin (light grey).",
  "steps": [
   {
    "step": 1,
@@ -526,6 +525,116 @@
    "part": "Sub-assembly 7",
    "bom": "",
    "instruction": "Lower the beam assembly onto the C blocks; Peg 33 goes into the top peg joiner."
+  }
+ ],
+ "bom": [
+  {
+   "name": "Friction Peg (black)",
+   "qty": 36
+  },
+  {
+   "name": "Long Peg (black)",
+   "qty": 1
+  },
+  {
+   "name": "DC Motor (grey)",
+   "qty": 1
+  },
+  {
+   "name": "Servo Motor with holder",
+   "qty": 1
+  },
+  {
+   "name": "Beam 9 (red)",
+   "qty": 2
+  },
+  {
+   "name": "Axle 4 (black)",
+   "qty": 1
+  },
+  {
+   "name": "Axle 9 (light grey)",
+   "qty": 1
+  },
+  {
+   "name": "Axle 16 (black)",
+   "qty": 1
+  },
+  {
+   "name": "16 Tooth Gear (tan)",
+   "qty": 2
+  },
+  {
+   "name": "40 Tooth Gear (light grey)",
+   "qty": 2
+  },
+  {
+   "name": "8 Tooth Gear (dark grey)",
+   "qty": 2
+  },
+  {
+   "name": "24 Tooth Gear (yellow)",
+   "qty": 2
+  },
+  {
+   "name": "Perpendicular Axle Joiner 3L with Pegs (light grey)",
+   "qty": 1
+  },
+  {
+   "name": "10x5 Block (light grey)",
+   "qty": 2
+  },
+  {
+   "name": "5x11 Plate (light grey)",
+   "qty": 1
+  },
+  {
+   "name": "15x5 Block (blue)",
+   "qty": 1
+  },
+  {
+   "name": "7x7 Block (white)",
+   "qty": 1
+  },
+  {
+   "name": "11x5 H Block (blue)",
+   "qty": 1
+  },
+  {
+   "name": "7x2 C Block (white)",
+   "qty": 2
+  },
+  {
+   "name": "Beam 15 (white)",
+   "qty": 1
+  },
+  {
+   "name": "Beam 11 (blue)",
+   "qty": 1
+  },
+  {
+   "name": "Beam 5 (blue)",
+   "qty": 4
+  },
+  {
+   "name": "Beam 3 (blue)",
+   "qty": 2
+  },
+  {
+   "name": "Lift Arm (dark grey)",
+   "qty": 1
+  },
+  {
+   "name": "Peg Joiner (white)",
+   "qty": 2
+  },
+  {
+   "name": "Half Bush (yellow)",
+   "qty": 4
+  },
+  {
+   "name": "Hole Pin (light grey)",
+   "qty": 1
   }
  ]
 }
