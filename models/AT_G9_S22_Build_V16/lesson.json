@@ -3,176 +3,178 @@
  "fps": 24,
  "introFrames": 700,
  "framesPerStep": 700,
- "note": "Holes are counted from the left, the front or the bottom, as the finished model faces the camera: motor on the right, blue front frame at the front.",
+ "note": "Holes are counted from the left, the front or the bottom, as the finished model faces the camera: motor on the right, front frame at the front.",
  "steps": [
   {
    "step": 1,
    "part": "Motor 1",
-   "bom": "DC Motor (grey)",
-   "instruction": "Hold the motor with its shaft pointing left, as shown."
+   "bom": "DC motor",
+   "instruction": "Hold the motor so the holes on its sides run horizontally."
   },
   {
    "step": 2,
-   "part": "Peg 27",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the motor face, in the hole behind the shaft."
+   "part": "Pin 27",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the motor face, in the hole beside its shaft."
   },
   {
    "step": 3,
-   "part": "Peg 26",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the motor face, in the hole in front of the shaft."
+   "part": "Pin 26",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the motor face, in the other hole beside its shaft."
   },
   {
    "step": 4,
    "part": "Beam 5",
-   "bom": "Beam 9 (red)",
-   "instruction": "Press the red beam onto both pegs, using holes 7 and 9 from the front."
+   "bom": "Size 9 beam",
+   "instruction": "Fix a size 9 beam onto both pins, using holes 7 and 9."
   },
   {
    "step": 5,
    "part": "Axle 3",
-   "bom": "Axle 4 (black)",
-   "instruction": "Push the short black axle through red beam hole 8 into the motor shaft."
+   "bom": "Size 4 axle",
+   "instruction": "Insert the size 4 axle into the motor shaft."
   },
   {
    "step": 6,
    "part": "Gear 8",
-   "bom": "16 Tooth Gear (tan)",
-   "instruction": "Slide a 16-tooth gear onto the black axle, against the red beam."
+   "bom": "16-tooth gear",
+   "instruction": "Slide a 16-tooth gear onto the size 4 axle."
   },
   {
    "step": 7,
    "part": "Perp Joiner 1",
-   "bom": "Perpendicular Axle Joiner 3L with Pegs (light grey)",
-   "instruction": "Press the joiner's pegs into red beam holes 2 and 4 from the front."
+   "bom": "Perpendicular axle joiner",
+   "instruction": "Fix a perpendicular axle joiner into holes 2 and 4 of the size 9 beam."
   },
   {
    "step": 8,
    "part": "Frame 2",
-   "bom": "10x5 Block (light grey)",
-   "instruction": "Start a second assembly: stand a grey frame upright."
+   "bom": "10x5 block",
+   "instruction": "Take a 10x5 block."
   },
   {
    "step": 9,
    "part": "Axle 1",
-   "bom": "Axle 9 (light grey)",
-   "instruction": "Push the long grey axle through the frame's top row, hole 7 from the front."
+   "bom": "Size 10 axle",
+   "instruction": "Push a size 10 axle through hole 7 of the 10x5 block.",
+   "check": "The 3D model still shows the old size 9 axle; the real build uses a size 10 axle."
   },
   {
    "step": 10,
    "part": "Gear 7",
-   "bom": "16 Tooth Gear (tan)",
-   "instruction": "Slide a 16-tooth gear onto the axle's short right end, against the frame."
+   "bom": "16-tooth gear",
+   "instruction": "Slide a 16-tooth gear onto the axle's short right end."
   },
   {
    "step": 11,
    "part": "Second assembly",
    "bom": "",
-   "instruction": "Join both assemblies: gears mesh, axle into red beam hole 6, joiner pegs into the frame."
+   "instruction": "Join both assemblies as shown."
   },
   {
    "step": 12,
-   "part": "Peg 17",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the frame's bottom row, hole 8 from the front."
+   "part": "Pin 17",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 10x5 block's bottom row, hole 8."
   },
   {
    "step": 13,
-   "part": "Peg 16",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the frame's bottom row, hole 4 from the front."
+   "part": "Pin 16",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 10x5 block's bottom row, hole 4."
   },
   {
    "step": 14,
    "part": "Beam 2",
-   "bom": "Beam 9 (red)",
-   "instruction": "Press the second red beam onto both pegs, using holes 3 and 7."
+   "bom": "Size 9 beam",
+   "instruction": "Attach a size 9 beam onto the pins, using holes 3 and 7."
   },
   {
    "step": 15,
-   "part": "Peg 14",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the second red beam's hole 8 from the front."
+   "part": "Pin 14",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into hole 8 of the size 9 beam."
   },
   {
    "step": 16,
-   "part": "Peg 13",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the second red beam's hole 2 from the front."
+   "part": "Pin 13",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into hole 2 of the size 9 beam."
   },
   {
    "step": 17,
    "part": "Plate 1",
-   "bom": "5x11 Plate (light grey)",
-   "instruction": "Press the plate's right side onto both pegs, using side holes 3 and 9."
+   "bom": "11x5 plate",
+   "instruction": "Attach an 11x5 plate to the size 9 beam."
   },
   {
    "step": 18,
    "part": "Gear 6",
-   "bom": "40 Tooth Gear (light grey)",
-   "instruction": "Slide the 40-tooth gear onto the long axle, all the way to the frame."
+   "bom": "40-tooth gear",
+   "instruction": "Slide a 40-tooth gear onto the size 10 axle, all the way to the 10x5 block."
   },
   {
    "step": 19,
    "part": "Gear 4",
-   "bom": "8 Tooth Gear (dark grey)",
-   "instruction": "Slide the 8-tooth gear on, leaving a one-and-a-half-hole gap after the 40-tooth gear.",
-   "check": "Please check: is the gap between the 40-tooth and 8-tooth gears really one and a half holes?"
+   "bom": "8-tooth gear",
+   "instruction": "Slide an 8-tooth gear on, leaving a 2-hole gap after the 40-tooth gear.",
+   "check": "The 3D model still shows the old size 9 axle, so it shows a 1.5-hole gap here, not 2."
   },
   {
    "step": 20,
    "part": "Axle 2",
-   "bom": "Axle 16 (black)",
-   "instruction": "Push the long black axle from the left through frame top hole 4, the joiner and red beam hole 3."
+   "bom": "Size 16 axle",
+   "instruction": "Push a size 16 axle through hole 4 of the 10x5 block."
   },
   {
    "step": 21,
    "part": "Gear 5",
-   "bom": "8 Tooth Gear (dark grey)",
-   "instruction": "Slide an 8-tooth gear onto the black axle, leaving a two-hole gap to the frame."
+   "bom": "8-tooth gear",
+   "instruction": "Slide an 8-tooth gear onto the size 16 axle."
   },
   {
    "step": 22,
    "part": "Gear 3",
-   "bom": "40 Tooth Gear (light grey)",
-   "instruction": "Slide the second 40-tooth gear onto the black axle, against the 8-tooth gear."
+   "bom": "40-tooth gear",
+   "instruction": "Slide the second 40-tooth gear onto the size 16 axle, all the way to the 8-tooth gear."
   },
   {
    "step": 23,
    "part": "Gear 2",
-   "bom": "24 Tooth Gear (yellow)",
-   "instruction": "Slide a 24-tooth gear onto the black axle, against the 40-tooth gear."
+   "bom": "24-tooth gear",
+   "instruction": "Slide a 24-tooth gear onto the size 16 axle, against the 40-tooth gear."
   },
   {
    "step": 24,
    "part": "Gear 1",
-   "bom": "24 Tooth Gear (yellow)",
-   "instruction": "Slide the other 24-tooth gear onto the grey axle, flush with its left end."
+   "bom": "24-tooth gear",
+   "instruction": "Slide the other 24-tooth gear onto the size 10 axle, leaving a 2-hole gap from the 8-tooth gear.",
+   "check": "The 3D model still shows the old size 9 axle, so it shows a 1.5-hole gap here, not 2."
   },
   {
    "step": 25,
-   "part": "Peg 5",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's left side, hole 9 from the front."
+   "part": "Pin 5",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's left side, hole 9 from the front."
   },
   {
    "step": 26,
-   "part": "Peg 4",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's left side, hole 6 from the front."
+   "part": "Pin 4",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's left side, hole 6 from the front."
   },
   {
    "step": 27,
-   "part": "Peg 3",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's left side, hole 3 from the front."
+   "part": "Pin 3",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's left side, hole 3 from the front."
   },
   {
    "step": 28,
    "part": "Frame 1",
-   "bom": "10x5 Block (light grey)",
-   "instruction": "Press the second grey frame onto the three left pegs; the black axle goes through top hole 4."
+   "bom": "10x5 block",
+   "instruction": "Attach the second 10x5 block onto the three left pins; the size 16 axle goes through top hole 4."
   },
   {
    "step": 29,
@@ -182,21 +184,21 @@
   },
   {
    "step": 30,
-   "part": "Peg 1",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's underside, second row from the front, hole 5."
+   "part": "Pin 1",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's underside, second row from the front, hole 5."
   },
   {
    "step": 31,
-   "part": "Peg 2",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's underside, second row from the front, hole 1."
+   "part": "Pin 2",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's underside, second row from the front, hole 1."
   },
   {
    "step": 32,
    "part": "Block 1",
-   "bom": "15x5 Block (blue)",
-   "instruction": "Press the blue block onto both pegs, using its front row, holes 1 and 5."
+   "bom": "15x5 block",
+   "instruction": "Connect a 15x5 block onto both pins, using its front row, holes 1 and 5."
   },
   {
    "step": 33,
@@ -206,204 +208,202 @@
   },
   {
    "step": 34,
-   "part": "Peg 28",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the motor's back, top hole nearest the red beam.",
-   "check": "Please check: the motor's back holes are described by position, not counted."
+   "part": "Pin 28",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the motor's side, bottom hole nearest the size 9 beam.",
+   "check": "The 3D model still puts this pin in the top hole; Tarun says it goes in the bottom hole."
   },
   {
    "step": 35,
-   "part": "Peg 21",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the motor's back, lower hole at the far right end.",
-   "check": "Please check: the motor's back holes are described by position, not counted."
+   "part": "Pin 21",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the motor's side, lower hole at the far right end."
   },
   {
    "step": 36,
-   "part": "Peg 29",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the motor's back, top hole at the far right end.",
-   "check": "Please check: the motor's back holes are described by position, not counted."
+   "part": "Pin 29",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the motor's side, top hole at the far right end."
   },
   {
    "step": 37,
    "part": "Block 2",
-   "bom": "7x7 Block (white)",
-   "instruction": "Press the white square frame onto the three motor pegs from behind."
+   "bom": "7x7 block",
+   "instruction": "Connect a 7x7 block onto the three pins on the motor."
   },
   {
    "step": 38,
-   "part": "Peg 20",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the white frame's right side, second hole from the bottom."
+   "part": "Pin 20",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 7x7 block's right side, second hole from the bottom."
   },
   {
    "step": 39,
-   "part": "Peg 18",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the white frame's left side, second hole from the bottom."
+   "part": "Pin 18",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 7x7 block's left side, second hole from the bottom."
   },
   {
    "step": 40,
-   "part": "Peg 12",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's back edge, hole 5 from the left."
+   "part": "Pin 12",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's back edge, hole 5 from the left."
   },
   {
    "step": 41,
-   "part": "Peg 10",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the plate's back edge, hole 3 from the left."
+   "part": "Pin 10",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the 11x5 plate's back edge, hole 3 from the left."
   },
   {
    "step": 42,
    "part": "Beam 3",
-   "bom": "Beam 15 (white)",
-   "instruction": "Press the white 15 beam onto the four back pegs, using holes 2, 4, 9 and 15."
+   "bom": "Size 15 beam",
+   "instruction": "Attach a size 15 beam onto the four back pins, using holes 2, 4, 9 and 15."
   },
   {
    "step": 43,
    "part": "Servo 1",
-   "bom": "Servo Motor with holder",
-   "instruction": "Start the servo assembly in front of the model: servo in its holder, shaft up."
+   "bom": "Servo motor with holder",
+   "instruction": "Start the servo assembly in front of the model: servo in its holder, shaft up. The servo's shaft is off-centre, so keep it on the side away from the gears. The servo is screwed into its holder, with the shaft attached."
   },
   {
    "step": 44,
-   "part": "Peg 9",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg up into the servo holder's right hole from below."
+   "part": "Pin 9",
+   "bom": "Friction pin",
+   "instruction": "Push a pin up into the servo holder's right hole from below."
   },
   {
    "step": 45,
-   "part": "Peg 8",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg up into the servo holder's left hole from below."
+   "part": "Pin 8",
+   "bom": "Friction pin",
+   "instruction": "Push a pin up into the servo holder's left hole from below."
   },
   {
    "step": 46,
    "part": "Servo assembly",
    "bom": "",
-   "instruction": "Move the servo assembly over the blue block; lower its pegs into front row holes 10 and 12."
+   "instruction": "Connect the servo assembly over the 15x5 block; lower its pins into front row holes 10 and 12."
   },
   {
    "step": 47,
    "part": "H Block 1",
-   "bom": "11x5 H Block (blue)",
-   "instruction": "Start the front frame assembly: lay the blue H block in front of the model."
+   "bom": "11x5 H block",
+   "instruction": "Start the front frame assembly: take an 11x5 H block."
   },
   {
    "step": 48,
-   "part": "Peg 24",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the H block's back, top row, hole 5 from the left."
+   "part": "Pin 24",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the H block's back, top row, hole 5 from the left."
   },
   {
    "step": 49,
-   "part": "Peg 23",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the H block's back, top row, hole 3 from the left."
+   "part": "Pin 23",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the H block's back, top row, hole 3 from the left."
   },
   {
    "step": 50,
    "part": "Beam 4",
-   "bom": "Beam 11 (blue)",
-   "instruction": "Press the blue 11 beam onto the top pegs, using holes 5 and 7."
+   "bom": "Size 11 beam",
+   "instruction": "Connect a size 11 beam onto the top pins, using holes 5 and 7."
   },
   {
    "step": 51,
-   "part": "Peg 15",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the H block's back, bottom row, hole 5 from the left."
+   "part": "Pin 15",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the H block's back, bottom row, hole 5 from the left."
   },
   {
    "step": 52,
-   "part": "Peg 11",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the H block's back, bottom row, hole 3 from the left."
+   "part": "Pin 11",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the H block's back, bottom row, hole 3 from the left."
   },
   {
    "step": 53,
    "part": "Beam 1",
-   "bom": "Beam 5 (blue)",
-   "instruction": "Press the blue 5 beam onto the bottom pegs, using holes 3 and 5."
+   "bom": "Size 5 beam",
+   "instruction": "Connect a size 5 beam onto the bottom pins, using holes 3 and 5."
   },
   {
    "step": 54,
-   "part": "Peg 22",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the blue 11 beam's back, hole 1 at the left end."
+   "part": "Pin 22",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the size 11 beam's back, hole 1 at the left end."
   },
   {
    "step": 55,
-   "part": "Peg 25",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the blue 11 beam's back, hole 8 from the left."
+   "part": "Pin 25",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the size 11 beam's back, hole 8 from the left."
   },
   {
    "step": 56,
-   "part": "Peg 6",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the blue 5 beam's back, hole 1 at the left end."
+   "part": "Pin 6",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the size 5 beam's back, hole 1 at the left end."
   },
   {
    "step": 57,
-   "part": "Peg 7",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the blue 5 beam's back, hole 4 from the left."
+   "part": "Pin 7",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the size 5 beam's back, hole 4 from the left."
   },
   {
    "step": 58,
    "part": "Front frame assembly",
    "bom": "",
-   "instruction": "Push the front frame onto the model: top pegs into both grey frames, bottom pegs into the plate."
+   "instruction": "Connect the front frame onto the model: top pins into both 10x5 blocks, bottom pins into the plate."
   },
   {
    "step": 59,
    "part": "Beam 8",
-   "bom": "Beam 5 (blue)",
-   "instruction": "Start sub-assembly 7 on the mat, front left: lay a blue 5 beam front to back."
+   "bom": "Size 5 beam",
+   "instruction": "Start sub-assembly 7 on the mat, front left: lay a size 5 beam front to back."
   },
   {
    "step": 60,
    "part": "Beam 6",
-   "bom": "Beam 5 (blue)",
-   "instruction": "Lay a second blue 5 beam parallel, one hole to its left."
+   "bom": "Size 5 beam",
+   "instruction": "Lay a second size 5 beam parallel, one hole to its left."
   },
   {
    "step": 61,
-   "part": "Peg 34",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the right beam's front hole."
+   "part": "Pin 34",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the right beam's front hole."
   },
   {
    "step": 62,
-   "part": "Peg 31",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the left beam's front hole."
+   "part": "Pin 31",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the left beam's front hole."
   },
   {
    "step": 63,
-   "part": "Peg 32",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the left beam's back hole."
+   "part": "Pin 32",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the left beam's back hole."
   },
   {
    "step": 64,
-   "part": "Peg 35",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the right beam's back hole."
+   "part": "Pin 35",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the right beam's back hole."
   },
   {
    "step": 65,
    "part": "Beam 9",
-   "bom": "Beam 3 (blue)",
-   "instruction": "Press a blue 3 beam across the two front pegs, using its end holes."
+   "bom": "Size 3 beam",
+   "instruction": "Press a size 3 beam across the two front pins, using its end holes."
   },
   {
    "step": 66,
    "part": "Beam 10",
-   "bom": "Beam 3 (blue)",
-   "instruction": "Press the second blue 3 beam across the two back pegs, using its end holes."
+   "bom": "Size 3 beam",
+   "instruction": "Press the second size 3 beam across the two back pins, using its end holes."
   },
   {
    "step": 67,
@@ -413,9 +413,9 @@
   },
   {
    "step": 68,
-   "part": "Peg 33",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the back blue 3 beam's middle hole, between the long beams."
+   "part": "Pin 33",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the back size 3 beam's middle hole, between the long beams."
   },
   {
    "step": 69,
@@ -425,215 +425,214 @@
   },
   {
    "step": 70,
-   "part": "C Block 1",
-   "bom": "7x2 C Block (white)",
-   "instruction": "Start sub-assembly 8 on the mat, front right: lay a white C block front to back."
+   "part": "C Beam 1",
+   "bom": "7x2 C beam",
+   "instruction": "Start sub-assembly 8 on the mat, front right: lay a 7x2 C beam front to back."
   },
   {
    "step": 71,
-   "part": "C Block 2",
-   "bom": "7x2 C Block (white)",
-   "instruction": "Lay the second C block beside it, flipped, one hole to its right."
+   "part": "C Beam 2",
+   "bom": "7x2 C beam",
+   "instruction": "Lay the second 7x2 C beam beside it, flipped, one hole to its right."
   },
   {
    "step": 72,
-   "part": "Peg 30",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the left C block's front end, left hole."
+   "part": "Pin 30",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the left C beam's front end, left hole."
   },
   {
    "step": 73,
-   "part": "Long Peg 1",
-   "bom": "Long Peg (black)",
-   "instruction": "Push the long peg through the left C block's front end, right hole; it sticks out below."
+   "part": "Long Pin 1",
+   "bom": "Long pin",
+   "instruction": "Push the long pin through the left C beam's front end, right hole; it sticks out below."
   },
   {
    "step": 74,
-   "part": "Peg 36",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the right C block's front end, left hole."
+   "part": "Pin 36",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the right C beam's front end, left hole."
   },
   {
    "step": 75,
-   "part": "Peg 37",
-   "bom": "Friction Peg (black)",
-   "instruction": "Push a peg into the right C block's front end, right hole."
+   "part": "Pin 37",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the right C beam's front end, right hole."
   },
   {
    "step": 76,
    "part": "Beam 7",
-   "bom": "Beam 5 (blue)",
-   "instruction": "Press a blue 5 beam across the front ends onto all four pegs: holes 1, 2, 4 and 5."
+   "bom": "Size 5 beam",
+   "instruction": "Connect a size 5 beam across the front ends onto all four pins: holes 1, 2, 4 and 5."
   },
   {
    "step": 77,
    "part": "Lift Arm 1",
-   "bom": "Lift Arm (dark grey)",
-   "instruction": "Press the lift arm onto the servo shaft, its far end pointing toward the black axle."
+   "bom": "Lift arm",
+   "instruction": "Press the lift arm onto the servo shaft, its far end pointing toward the size 16 axle."
   },
   {
    "step": 78,
    "part": "Peg Joiner 1",
-   "bom": "Peg Joiner (white)",
-   "instruction": "Push a white peg joiner down into the lift arm's far-end hole."
+   "bom": "Peg joiner",
+   "instruction": "Attach a peg joiner down into the lift arm's far-end hole."
   },
   {
    "step": 79,
    "part": "Bush 1",
-   "bom": "Half Bush (yellow)",
-   "instruction": "Slide a half bush onto the black axle's right end, about one hole from the red beam.",
-   "check": "Please check: \"about one hole\" is approximate; in the model the gap is a little under one hole."
+   "bom": "Half bush",
+   "instruction": "Slide a half bush onto the size 16 axle's right end."
   },
   {
    "step": 80,
    "part": "Bush 2",
-   "bom": "Half Bush (yellow)",
+   "bom": "Half bush",
    "instruction": "Slide a second half bush on, against the first."
   },
   {
    "step": 81,
    "part": "Hole Pin 1",
-   "bom": "Hole Pin (light grey)",
-   "instruction": "Slide the hole pin onto the black axle, its pin pointing up."
+   "bom": "Hole pin",
+   "instruction": "Slide the hole pin onto the size 16 axle, its pin pointing up."
   },
   {
    "step": 82,
    "part": "Bush 3",
-   "bom": "Half Bush (yellow)",
+   "bom": "Half bush",
    "instruction": "Slide a half bush on, against the hole pin."
   },
   {
    "step": 83,
    "part": "Bush 4",
-   "bom": "Half Bush (yellow)",
+   "bom": "Half bush",
    "instruction": "Slide the last half bush on, against the third."
   },
   {
    "step": 84,
    "part": "Peg Joiner 2",
-   "bom": "Peg Joiner (white)",
-   "instruction": "Press the second white peg joiner down onto the hole pin's pin."
+   "bom": "Peg joiner",
+   "instruction": "Press the second peg joiner down onto the hole pin's pin."
   },
   {
    "step": 85,
    "part": "Sub-assembly 8",
    "bom": "",
-   "instruction": "Lift the C block assembly onto the model: long peg into the H block, C blocks either side of the joiners."
+   "instruction": "Lift the C beam assembly onto the model: long pin into the H block's 2nd hole from the right, C beams either side of the peg joiners."
   },
   {
    "step": 86,
    "part": "Sub-assembly 7",
    "bom": "",
-   "instruction": "Lower the beam assembly onto the C blocks; Peg 33 goes into the top peg joiner."
+   "instruction": "Lower the beam assembly onto the C beams; the pin on the size 3 beam goes into the top peg joiner."
   }
  ],
  "bom": [
   {
-   "name": "Friction Peg (black)",
+   "name": "Friction pin",
    "qty": 36
   },
   {
-   "name": "Long Peg (black)",
+   "name": "Long pin",
    "qty": 1
   },
   {
-   "name": "DC Motor (grey)",
+   "name": "DC motor",
    "qty": 1
   },
   {
-   "name": "Servo Motor with holder",
+   "name": "Servo motor with holder",
    "qty": 1
   },
   {
-   "name": "Beam 9 (red)",
+   "name": "Size 9 beam",
    "qty": 2
   },
   {
-   "name": "Axle 4 (black)",
+   "name": "Size 4 axle",
    "qty": 1
   },
   {
-   "name": "Axle 9 (light grey)",
+   "name": "Size 10 axle",
    "qty": 1
   },
   {
-   "name": "Axle 16 (black)",
+   "name": "Size 16 axle",
    "qty": 1
   },
   {
-   "name": "16 Tooth Gear (tan)",
+   "name": "16-tooth gear",
    "qty": 2
   },
   {
-   "name": "40 Tooth Gear (light grey)",
+   "name": "40-tooth gear",
    "qty": 2
   },
   {
-   "name": "8 Tooth Gear (dark grey)",
+   "name": "8-tooth gear",
    "qty": 2
   },
   {
-   "name": "24 Tooth Gear (yellow)",
+   "name": "24-tooth gear",
    "qty": 2
   },
   {
-   "name": "Perpendicular Axle Joiner 3L with Pegs (light grey)",
+   "name": "Perpendicular axle joiner",
    "qty": 1
   },
   {
-   "name": "10x5 Block (light grey)",
+   "name": "10x5 block",
    "qty": 2
   },
   {
-   "name": "5x11 Plate (light grey)",
+   "name": "11x5 plate",
    "qty": 1
   },
   {
-   "name": "15x5 Block (blue)",
+   "name": "15x5 block",
    "qty": 1
   },
   {
-   "name": "7x7 Block (white)",
+   "name": "7x7 block",
    "qty": 1
   },
   {
-   "name": "11x5 H Block (blue)",
+   "name": "11x5 H block",
    "qty": 1
   },
   {
-   "name": "7x2 C Block (white)",
+   "name": "7x2 C beam",
    "qty": 2
   },
   {
-   "name": "Beam 15 (white)",
+   "name": "Size 15 beam",
    "qty": 1
   },
   {
-   "name": "Beam 11 (blue)",
+   "name": "Size 11 beam",
    "qty": 1
   },
   {
-   "name": "Beam 5 (blue)",
+   "name": "Size 5 beam",
    "qty": 4
   },
   {
-   "name": "Beam 3 (blue)",
+   "name": "Size 3 beam",
    "qty": 2
   },
   {
-   "name": "Lift Arm (dark grey)",
+   "name": "Lift arm",
    "qty": 1
   },
   {
-   "name": "Peg Joiner (white)",
+   "name": "Peg joiner",
    "qty": 2
   },
   {
-   "name": "Half Bush (yellow)",
+   "name": "Half bush",
    "qty": 4
   },
   {
-   "name": "Hole Pin (light grey)",
+   "name": "Hole pin",
    "qty": 1
   }
  ]
