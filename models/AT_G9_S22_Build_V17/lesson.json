@@ -1,5 +1,5 @@
 {
- "title": "Grade 9 \u00b7 Session 22 \u00b7 Build V16",
+ "title": "Grade 9 \u00b7 Session 22 \u00b7 Build V17",
  "fps": 24,
  "introFrames": 700,
  "framesPerStep": 700,
@@ -210,8 +210,7 @@
    "step": 34,
    "part": "Pin 28",
    "bom": "Friction pin",
-   "instruction": "Push a pin into the motor's side, bottom hole nearest the size 9 beam.",
-   "check": "The 3D model still puts this pin in the top hole; Tarun says it goes in the bottom hole."
+   "instruction": "Push a pin into the motor's side, bottom hole nearest the size 9 beam."
   },
   {
    "step": 35,
@@ -232,295 +231,330 @@
    "instruction": "Connect a 7x7 block onto the three pins on the motor."
   },
   {
-   "step": 38,
+   "part": "Pin 38",
+   "bom": "Friction pin",
+   "instruction": "Push a pin up into the top of the 7x7 block, hole 1 from the left.",
+   "check": "New in V17. Worded from the 3D model, not yet checked against a real build.",
+   "step": 38
+  },
+  {
+   "part": "Pin 39",
+   "bom": "Friction pin",
+   "instruction": "Push a pin up into the top of the 7x7 block, hole 4 from the left.",
+   "check": "New in V17. Worded from the 3D model, not yet checked against a real build.",
+   "step": 39
+  },
+  {
+   "part": "Beam 11",
+   "bom": "Size 7 beam",
+   "instruction": "Press a size 7 beam onto both pins, using holes 1 and 4.",
+   "check": "New in V17. Worded from the 3D model, not yet checked against a real build.",
+   "step": 40
+  },
+  {
+   "part": "Pin 40",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the top of the size 7 beam, hole 3 from the left.",
+   "check": "New in V17. Worded from the 3D model, not yet checked against a real build.",
+   "step": 41
+  },
+  {
+   "part": "Pin 41",
+   "bom": "Friction pin",
+   "instruction": "Push a pin into the top of the size 7 beam, hole 5 from the left.",
+   "check": "New in V17. Worded from the 3D model, not yet checked against a real build.",
+   "step": 42
+  },
+  {
+   "step": 43,
    "part": "Pin 20",
    "bom": "Friction pin",
    "instruction": "Push a pin into the 7x7 block's right side, second hole from the bottom."
   },
   {
-   "step": 39,
+   "step": 44,
    "part": "Pin 18",
    "bom": "Friction pin",
    "instruction": "Push a pin into the 7x7 block's left side, second hole from the bottom."
   },
   {
-   "step": 40,
+   "step": 45,
    "part": "Pin 12",
    "bom": "Friction pin",
    "instruction": "Push a pin into the 11x5 plate's back edge, hole 5 from the left."
   },
   {
-   "step": 41,
+   "step": 46,
    "part": "Pin 10",
    "bom": "Friction pin",
    "instruction": "Push a pin into the 11x5 plate's back edge, hole 3 from the left."
   },
   {
-   "step": 42,
+   "step": 47,
    "part": "Beam 3",
    "bom": "Size 15 beam",
    "instruction": "Attach a size 15 beam onto the four back pins, using holes 2, 4, 9 and 15."
   },
   {
-   "step": 43,
+   "step": 48,
    "part": "Servo 1",
    "bom": "Servo motor with holder",
    "instruction": "Start the servo assembly in front of the model: servo in its holder, shaft up. The servo's shaft is off-centre, so keep it on the side away from the gears. The servo is screwed into its holder, with the shaft attached."
   },
   {
-   "step": 44,
+   "step": 49,
    "part": "Pin 9",
    "bom": "Friction pin",
    "instruction": "Push a pin up into the servo holder's right hole from below."
   },
   {
-   "step": 45,
+   "step": 50,
    "part": "Pin 8",
    "bom": "Friction pin",
    "instruction": "Push a pin up into the servo holder's left hole from below."
   },
   {
-   "step": 46,
+   "step": 51,
    "part": "Servo assembly",
    "bom": "",
    "instruction": "Connect the servo assembly over the 15x5 block; lower its pins into front row holes 10 and 12."
   },
   {
-   "step": 47,
+   "step": 52,
    "part": "H Block 1",
    "bom": "11x5 H block",
    "instruction": "Start the front frame assembly: take an 11x5 H block."
   },
   {
-   "step": 48,
+   "step": 53,
    "part": "Pin 24",
    "bom": "Friction pin",
    "instruction": "Push a pin into the H block's back, top row, hole 5 from the left."
   },
   {
-   "step": 49,
+   "step": 54,
    "part": "Pin 23",
    "bom": "Friction pin",
    "instruction": "Push a pin into the H block's back, top row, hole 3 from the left."
   },
   {
-   "step": 50,
+   "step": 55,
    "part": "Beam 4",
    "bom": "Size 11 beam",
    "instruction": "Connect a size 11 beam onto the top pins, using holes 5 and 7."
   },
   {
-   "step": 51,
+   "step": 56,
    "part": "Pin 15",
    "bom": "Friction pin",
    "instruction": "Push a pin into the H block's back, bottom row, hole 5 from the left."
   },
   {
-   "step": 52,
+   "step": 57,
    "part": "Pin 11",
    "bom": "Friction pin",
    "instruction": "Push a pin into the H block's back, bottom row, hole 3 from the left."
   },
   {
-   "step": 53,
+   "step": 58,
    "part": "Beam 1",
    "bom": "Size 5 beam",
    "instruction": "Connect a size 5 beam onto the bottom pins, using holes 3 and 5."
   },
   {
-   "step": 54,
+   "step": 59,
    "part": "Pin 22",
    "bom": "Friction pin",
    "instruction": "Push a pin into the size 11 beam's back, hole 1 at the left end."
   },
   {
-   "step": 55,
+   "step": 60,
    "part": "Pin 25",
    "bom": "Friction pin",
    "instruction": "Push a pin into the size 11 beam's back, hole 8 from the left."
   },
   {
-   "step": 56,
+   "step": 61,
    "part": "Pin 6",
    "bom": "Friction pin",
    "instruction": "Push a pin into the size 5 beam's back, hole 1 at the left end."
   },
   {
-   "step": 57,
+   "step": 62,
    "part": "Pin 7",
    "bom": "Friction pin",
    "instruction": "Push a pin into the size 5 beam's back, hole 4 from the left."
   },
   {
-   "step": 58,
+   "step": 63,
    "part": "Front frame assembly",
    "bom": "",
    "instruction": "Connect the front frame onto the model: top pins into both 10x5 blocks, bottom pins into the plate."
   },
   {
-   "step": 59,
+   "step": 64,
    "part": "Beam 8",
    "bom": "Size 5 beam",
    "instruction": "Start sub-assembly 7 on the mat, front left: lay a size 5 beam front to back."
   },
   {
-   "step": 60,
+   "step": 65,
    "part": "Beam 6",
    "bom": "Size 5 beam",
    "instruction": "Lay a second size 5 beam parallel, one hole to its left."
   },
   {
-   "step": 61,
+   "step": 66,
    "part": "Pin 34",
    "bom": "Friction pin",
    "instruction": "Push a pin into the right beam's front hole."
   },
   {
-   "step": 62,
+   "step": 67,
    "part": "Pin 31",
    "bom": "Friction pin",
    "instruction": "Push a pin into the left beam's front hole."
   },
   {
-   "step": 63,
+   "step": 68,
    "part": "Pin 32",
    "bom": "Friction pin",
    "instruction": "Push a pin into the left beam's back hole."
   },
   {
-   "step": 64,
+   "step": 69,
    "part": "Pin 35",
    "bom": "Friction pin",
    "instruction": "Push a pin into the right beam's back hole."
   },
   {
-   "step": 65,
+   "step": 70,
    "part": "Beam 9",
    "bom": "Size 3 beam",
    "instruction": "Press a size 3 beam across the two front pins, using its end holes."
   },
   {
-   "step": 66,
+   "step": 71,
    "part": "Beam 10",
    "bom": "Size 3 beam",
    "instruction": "Press the second size 3 beam across the two back pins, using its end holes."
   },
   {
-   "step": 67,
+   "step": 72,
    "part": "Sub-assembly 7",
    "bom": "",
    "instruction": "Turn sub-assembly 7 upside down."
   },
   {
-   "step": 68,
+   "step": 73,
    "part": "Pin 33",
    "bom": "Friction pin",
    "instruction": "Push a pin into the back size 3 beam's middle hole, between the long beams."
   },
   {
-   "step": 69,
+   "step": 74,
    "part": "Sub-assembly 7",
    "bom": "",
    "instruction": "Turn sub-assembly 7 back over and leave it flat on the mat."
   },
   {
-   "step": 70,
+   "step": 75,
    "part": "C Beam 1",
    "bom": "7x2 C beam",
    "instruction": "Start sub-assembly 8 on the mat, front right: lay a 7x2 C beam front to back."
   },
   {
-   "step": 71,
+   "step": 76,
    "part": "C Beam 2",
    "bom": "7x2 C beam",
    "instruction": "Lay the second 7x2 C beam beside it, flipped, one hole to its right."
   },
   {
-   "step": 72,
+   "step": 77,
    "part": "Pin 30",
    "bom": "Friction pin",
    "instruction": "Push a pin into the left C beam's front end, left hole."
   },
   {
-   "step": 73,
+   "step": 78,
    "part": "Long Pin 1",
    "bom": "Long pin",
    "instruction": "Push the long pin through the left C beam's front end, right hole; it sticks out below."
   },
   {
-   "step": 74,
+   "step": 79,
    "part": "Pin 36",
    "bom": "Friction pin",
    "instruction": "Push a pin into the right C beam's front end, left hole."
   },
   {
-   "step": 75,
+   "step": 80,
    "part": "Pin 37",
    "bom": "Friction pin",
    "instruction": "Push a pin into the right C beam's front end, right hole."
   },
   {
-   "step": 76,
+   "step": 81,
    "part": "Beam 7",
    "bom": "Size 5 beam",
    "instruction": "Connect a size 5 beam across the front ends onto all four pins: holes 1, 2, 4 and 5."
   },
   {
-   "step": 77,
+   "step": 82,
    "part": "Lift Arm 1",
    "bom": "Lift arm",
    "instruction": "Press the lift arm onto the servo shaft, its far end pointing toward the size 16 axle."
   },
   {
-   "step": 78,
+   "step": 83,
    "part": "Peg Joiner 1",
    "bom": "Peg joiner",
    "instruction": "Attach a peg joiner down into the lift arm's far-end hole."
   },
   {
-   "step": 79,
+   "step": 84,
    "part": "Bush 1",
    "bom": "Half bush",
    "instruction": "Slide a half bush onto the size 16 axle's right end."
   },
   {
-   "step": 80,
+   "step": 85,
    "part": "Bush 2",
    "bom": "Half bush",
    "instruction": "Slide a second half bush on, against the first."
   },
   {
-   "step": 81,
+   "step": 86,
    "part": "Hole Pin 1",
    "bom": "Hole pin",
    "instruction": "Slide the hole pin onto the size 16 axle, its pin pointing up."
   },
   {
-   "step": 82,
+   "step": 87,
    "part": "Bush 3",
    "bom": "Half bush",
    "instruction": "Slide a half bush on, against the hole pin."
   },
   {
-   "step": 83,
+   "step": 88,
    "part": "Bush 4",
    "bom": "Half bush",
    "instruction": "Slide the last half bush on, against the third."
   },
   {
-   "step": 84,
+   "step": 89,
    "part": "Peg Joiner 2",
    "bom": "Peg joiner",
    "instruction": "Press the second peg joiner down onto the hole pin's pin."
   },
   {
-   "step": 85,
+   "step": 90,
    "part": "Sub-assembly 8",
    "bom": "",
    "instruction": "Lift the C beam assembly onto the model: long pin into the H block's 2nd hole from the right, C beams either side of the peg joiners."
   },
   {
-   "step": 86,
+   "step": 91,
    "part": "Sub-assembly 7",
    "bom": "",
    "instruction": "Lower the beam assembly onto the C beams; the pin on the size 3 beam goes into the top peg joiner."
@@ -529,7 +563,7 @@
  "bom": [
   {
    "name": "Friction pin",
-   "qty": 36
+   "qty": 40
   },
   {
    "name": "Long pin",
@@ -609,6 +643,10 @@
   },
   {
    "name": "Size 11 beam",
+   "qty": 1
+  },
+  {
+   "name": "Size 7 beam",
    "qty": 1
   },
   {
