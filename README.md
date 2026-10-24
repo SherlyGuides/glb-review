@@ -1,6 +1,6 @@
 # ThinkPro GLB Review
 
-A review copy of the Learno GLB player, hosted on GitHub Pages, for sending builds to reviewers.
+A review copy of the LMS Player for ThinkPro, hosted on GitHub Pages, for sending builds to reviewers.
 
 Reviewers mark each step OK or Needs change, add notes, and click on the model to pin comments. "Send review" gives them a link, an email, a file, or a GitHub issue. Opening a review link (or "Open review file…") shows that reviewer's comments on the model, read-only.
 
